@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P21</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script>
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        var table = new twaver.controls.Table(box);
+        var node,freshTableTimerId ;
+        function init() {
+            initNetwork();
+            initDataBox();
+            initTable();
+        }
+        function initNetwork(){
+            var networkDom = network.getView();
+            document.getElementById("main").appendChild(networkDom);
+            network.adjustBounds({x:0,y:0,width:1300,height:800});
+            network.setMaxZoom(100);
+        }
+        function initDataBox(){
+            node = new twaver.HTMLNode();
+            node.setImage(null);
+            var html = "";
+            html += "" +
+                "<div style='width:400px;'> " +
+                " <div id='tableBoxTitle' style='width:400px;height:20px;text-align:center;background-color:#ccc;-moz-border-radius-topright: 10px;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-webkit-border-top-right-radius: 10px;'> " +
+                // " <div id='tableBoxTitle' style='width:400px;height:20px;text-align:center;background-color:#ccc;'> " +
+            " <span>表格标题栏</span>" +
+            " </div> " +
+            " <div id='tableBox' style='width:400px;'> " +
+            " </div> " +
+            "</div>";
+            node.setName(html);
+            node.setLocation(100, 0);
+            box.add(node);
+            var i = 5;
+            while (i-- > 0) {
+                var data = new twaver.Node();
+                data.setName("TWaver-" + i);
+                data.setLocation(Math.random()*600 + 400, Math.random()*600 + 100);
+                data.s('inner.color', randomColor());
+                box.add(data);
+            }
+        }
+        function initTable(){
+            network.addViewListener(function(e){
+                if(e.kind === 'validateEnd'){
+                    var tableBox = document.getElementById('tableBox');
+                    var tablePane = new twaver.controls.TablePane(table);
+                    var tableDom = tablePane.getView();
+                    tableDom.style.width = "400px";
+                    tableDom.style.height = "200px";
+                    tableBox.appendChild(tableDom);
+                }
+            });
+            window.onresize = function () {
+                tablePane.invalidate();
+            }
+            createColumn(table, 'Name', 'name', 'accessor', 'string');
+            createColumn(table, 'Id', 'id', 'accessor', 'string');
+            createColumn(table, 'Icon', 'icon', 'accessor');
+            var column = createColumn(table, 'Inner Color', 'inner.color', 'style', 'color');
+            column.setSortFunction(function (color1, color2) {
+                if (!color1) {
+                    return -1;
+                }
+                if (!color2) {
+                    return 1;
+                }
+                var number1 = parseInt(color1.substring(1), 16);
+                var r1 = (number1 >> 16) & 0xff;
+                var g1 = (number1 >> 8) & 0xff;
+                var b1 = number1 & 0xff;
+                var number2 = parseInt(color2.substring(1), 16);
+                var r2 = (number2 >> 16) & 0xff;
+                var g2 = (number2 >> 8 ) & 0xff;
+                var b2 = number2 & 0xff;
+                return (r1 + g1 + b1) - (r2 + g2 + b2);
+            });
+        }
+        function zoomIn(){
+            network.zoomIn();
+        }
+        function zoomOut(){
+            network.zoomOut();
+        }
+        function registerImage(){
+        }
+        function registerNormalImage(url, name) {
+            var image = new Image();
+            image.src = url;
+            image.onload = function() {
+                twaver.Util.registerImage(name, image, image.width, image.height);
+                image.onload = null;
+                network.invalidateElementUIs();
+            };
+        }
+        function createColumn(table, name, propetyName, propertyType, valueType) {
+            var column = new twaver.Column(name);
+            column.setName(name);
+            column.setPropertyName(propetyName);
+            column.setPropertyType(propertyType);
+            if (valueType) {
+                column.setValueType(valueType);
+            }
+            table.getColumnBox().add(column);
+            return column;
+        }
+        function randomColor() {
+            var r = randomInt(255);
+            var g = randomInt(255);
+            var b = randomInt(255);
+            return '#' + formatNumber((r << 16) | (g << 8) | b);
+        }
+        function randomInt(n) {
+            return Math.floor(Math.random() * n);
+        }
+        function formatNumber(value) {
+            var result = value.toString(16);
+            while (result.length < 6) {
+                result = '0' + result;
+            }
+            return result;
+        }
+    </script>
+
+</head>
+<body onload="init()">
+<div>
+    <button onclick="zoomIn()">
+        Zoom In
+    </button>
+    <button onclick="zoomOut()">
+        Zoom Out
+    </button>
+    <!--<button onclick="removeNode()">-->
+        <!--ClearBox-->
+    <!--</button>-->
+</div>
+<br/>
+<div id="main" style="position:relative;">
+</div>
+
+</body>
+</html>

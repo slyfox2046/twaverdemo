@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P21</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script>
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        function init() {
+            initNetwork();
+            initDataBox();
+        }
+        function initNetwork(){
+            var networkDom = network.getView();
+            document.getElementById("main").appendChild(networkDom);
+            network.adjustBounds({x:0,y:0,width:1600,height:800});
+            network.getAlarmLabel = function(element){
+                var severity = element.getAlarmState().getHighestNewAlarmSeverity();
+                if (severity) {
+                    var label = element.getAlarmState().getNewAlarmCount(severity) + severity.nickName;
+                    if (element.getAlarmState().hasLessSevereNewAlarms()) {
+                        label += "+";
+                    }
+                    label = "<div><p><font color=green size=+6>" + label + "</font></div>";
+                    return label;
+                }
+                return null;
+            }
+        }
+        function initDataBox(){
+            var htmlNode = new twaver.HTMLNode({
+                name:"<div style='background:rgba(200,200,200,0.6)'>In case you thought that TWaver label had to be" +
+                    "<p>boring, one line descriptions, the " +
+                    "<p><font color=yellow size=+2>TWaver Team</font>" +
+                    "<p> is happy to shatter your illusions.<p>" +
+                    "In TWaver, they can use HTML to " +
+                    "<ul><li>Have Lists<li><b>Bold</b> " +
+                    "text<li><em>emphasized</em> " +
+                    "text<li>text with <font color=red>Color</font>" +
+                    "<li>text in different <font size=+3>sizes</font>" +
+                    "<li>and <font face=AvantGarde>Fonts</font></ul>" +
+                    "Oh, and they can be multi-line, too.</div>",
+                location:{x: 600, y:200},
+                name2:"<div>www.baidu.com<div>"
+
+            });
+            box.add(htmlNode);
+            console.log(htmlNode);
+            addAlarm("alarm 2", htmlNode.getId(), twaver.AlarmSeverity.CRITICAL, box.getAlarmBox());
+        }
+        function addAlarm(alarmID, elementID, alarmSeverity, alarmBox) {
+            var alarm = new twaver.Alarm(alarmID, elementID, alarmSeverity);
+            alarmBox.add(alarm);
+        }
+        //示例2:呈现GIF图片
+        for(var i=0;i<10;i++){
+            var htmlNode = new twaver.HTMLNode({
+                width:95,
+                height:95,
+                name:"<image src='../images/run.gif' style='width:100px;height:100px'/>",
+                location:{x: 100 + 50*i, y:200+ i%2 * 100}
+            });
+            box.add(htmlNode);
+            htmlNode.setStyle('label.position','center');
+        }
+
+        //呈现SVG资源
+        // var svgNode = new twaver.HTMLNode();
+        // svgNode.setWidth(660);
+        // svgNode.setHeight(330);
+        // svgNode.setImage("rect");
+        // svgNode.setName("<svg id='svg2' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'' xmlns='http://www.w3.org/2000/svg' height='330'
+        // svgNode.setLocation(300,150);
+        // box.add(svgNode);
+    </script>
+
+</head>
+<body onload="init()">
+    <div id="main" style="position: relative"></div>
+
+</body>
+</html>
