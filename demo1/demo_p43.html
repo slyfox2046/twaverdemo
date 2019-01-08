@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P30</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        var bus = new twaver.Bus();
+        var busCount = 40;
+
+        function init() {
+            initNetwork();
+            initListener();
+            initDataBox();
+        }
+
+        function initNetwork() {
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+            twaver.Styles.setStyle('group.expanded', true);
+        }
+
+        function initListener() {
+
+        }
+
+        function initDataBox() {
+            bus.setStyle('vector.outline.width', 3);
+            bus.setStyle('vector.outline.color', twaver.Colors.green_light);
+            bus.setStyle('bus.style', 'south');
+            bus.setLocation(0, 0);
+            box.add(bus);
+            for (var i = 0; i < busCount; i++) {
+                var id = "10.0.0." + i;
+                var node = new twaver.Node(id);
+                node.setName(id);
+                box.add(node);
+                var link = new twaver.Link(node, bus);
+                link.setStyle('link.width', 2);
+                link.setStyle('link.color', twaver.Colors.orange_light);
+                box.add(link);
+            }
+            refreshBus();
+
+        }
+
+        function refreshBus() {
+            var lastWidth = document.documentElement.clientWidth;
+            var margin = 40;
+            var wGap = 110;
+            var hGap = 120;
+            var zoom = network.getZoom();
+            console.log(zoom);
+            var width = Math.max(margin * 2, lastWidth / zoom - margin * 2);
+            var columnCount = Math.max(3, Math.floor(width / wGap));
+            wGap = width / columnCount;
+            var rowCount = Math.floor(busCount / (columnCount - 1));
+            if (rowCount * (columnCount - 1) < busCount) {
+                rowCount++;
+            }
+            bus.getPoints().clear();
+            var count = 0;
+            var x = 0;
+            var y = 0;
+            bus.getPoints().add({
+                x: margin,
+                y: hGap + 15
+            });
+            bus.getPoints().add({
+                x: margin,
+                y: hGap - 15
+            });
+            for (var i = 0; i < rowCount; i++) {
+                y = hGap * (i + 1);
+                if (i % 2 == 0) {
+                    bus.getPoints().add({
+                        x: margin,
+                        y: y
+                    });
+                    bus.getPoints().add({
+                        x: margin + width,
+                        y: y
+                    });
+                } else {
+                    bus.getPoints().add({
+                        x: margin + width,
+                        y: y
+                    });
+                    bus.getPoints().add({
+                        x: margin,
+                        y: y
+                    });
+                }
+                y-= hGap / 2 - 5;
+                for (var k = 1; k < columnCount; k++) {
+                    var node = box.getDataById("10.0.0." + count++);
+                    if (node == null) {
+                        continue;
+                    }
+                    if (i % 2 == 0) {
+                        x = margin + k * wGap;
+                    } else {
+                        x = margin + width - k * wGap;
+                    }
+                    node.setCenterLocation(x, y);
+                }
+            }
+            console.log(bus.getPoints().size());
+            var point = bus.getPoints().get(bus.getPoints().size() - 1);
+            bus.getPoints().add({
+                x: point.x,
+                y: point.y + 15
+            });
+            bus.getPoints().add({
+                x: point.x,
+                y: point.y - 15
+            });
+            // bus.firePointsChange();
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+
+</body>
+
+</html>
