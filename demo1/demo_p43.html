@@ -9,7 +9,7 @@
         var box = new twaver.ElementBox();
         var network = new twaver.vector.Network(box);
         var bus = new twaver.Bus();
-        var busCount = 40;
+        var busCount = 20;
 
         function init() {
             initNetwork();
@@ -31,7 +31,7 @@
             bus.setStyle('vector.outline.width', 3);
             bus.setStyle('vector.outline.color', twaver.Colors.green_light);
             bus.setStyle('bus.style', 'south');
-            bus.setLocation(0, 0);
+            bus.setLocation(500, 500);
             box.add(bus);
             for (var i = 0; i < busCount; i++) {
                 var id = "10.0.0." + i;
@@ -49,8 +49,8 @@
 
         function refreshBus() {
             var lastWidth = document.documentElement.clientWidth;
-            var margin = 40;
-            var wGap = 110;
+            var margin = 80;
+            var wGap = 210;
             var hGap = 120;
             var zoom = network.getZoom();
             console.log(zoom);
@@ -108,7 +108,7 @@
                     node.setCenterLocation(x, y);
                 }
             }
-            console.log(bus.getPoints().size());
+            console.log(bus.getPoints());
             var point = bus.getPoints().get(bus.getPoints().size() - 1);
             bus.getPoints().add({
                 x: point.x,
