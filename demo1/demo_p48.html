@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P48</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network;
+        var datas;
+        function init() {
+            initCanvas();
+            initBox();
+        }
+        function initCanvas() {
+            network = new twaver.canvas.Network(box);
+            document.body.appendChild(network.getView());
+            network.getView().style.background = '#e9e9e9';
+            network.adjustBounds({x: 0, y: 30, width: 1300, height: 600});
+        }
+        function initBox() {
+            var from = new twaver.Node();
+            from.setName('From');
+            // from.setLocation(Math.random() * 1000, Math.random() * 500);
+            from.setLocation(document.body.clientWidth/2,300);
+            console.log(document.body.clientWidth/2);
+            box.add(from);
+            for (var i = 0; i < 20; i++) {
+                var to = new twaver.Node();
+                to.setName('To');
+                to.setLocation(Math.random() * 1200, Math.random() * 600);
+                box.add(to);
+                var link = new twaver.Link(from, to);
+                link.setName('Link');
+                box.add(link);
+            }
+            datas = new twaver.JsonSerializer(box).serialize();
+            console.log(datas);
+        }
+        function xmlRead() {
+            box.clear();
+            if(datas) {
+                new twaver.JsonSerializer(box).deserialize(datas);
+            }
+            box.forEach(function(data){
+                if(data instanceof twaver.Link){
+                    data.setStyle('whole.alpha',0.3);
+                }
+            })
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+    <button onclick="xmlRead()">
+        xmlRead
+    </button>
+</body>
+
+</html>
