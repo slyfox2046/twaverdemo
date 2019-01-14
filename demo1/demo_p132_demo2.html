@@ -30,22 +30,30 @@
                 var radius = r*( i%2 * 0.5 + 0.5);
                 node.setLocation(x+radius*Math.cos(angle), y+radius*Math.sin(angle));
                 node.setLayerId('node');
+                node.setName('node' + i);
+
                 box.add(node);
 
                 var link = new twaver.Link(center, node);
                 link.setStyle('link.width', 1);
                 link.setStyle('link.color', 'orange');
                 link.setLayerId('link');
+                link.setName('link' + i);
+
                 box.add(link);
             }
 
             var linkLayer=new twaver.Layer('link');
             box.getLayerBox().add(linkLayer);
             box.getLayerBox().moveToTop(linkLayer);
+
+            console.log(network.getGraphicsZoom(),network.getSizeZoom(),network.getLocationZoom());// 1,1,1
             // 默认情况下，就是使用了物理缩放
             // network.setZoomManager(new twaver.vector.PhysicalZoomManager(network));
-            // network.setZoomManager(new twaver.vector.LogicalZoomManager(network));
-            network.setZoomManager(new twaver.vector.MixedZoomManager(network));
+            network.setZoomManager(new twaver.vector.LogicalZoomManager(network));
+            // network.setZoomManager(new twaver.vector.MixedZoomManager(network));
+
+
 
             console.log(network.getGraphicsZoom(),network.getSizeZoom(),network.getLocationZoom());// 1,1,1
 
@@ -53,7 +61,7 @@
             network.setZoomVisibilityThresholds({
                 zoomName : 'sizeZoom',
                 link : 0.5,
-                label : 1.1,
+                label : 1.5,
                 label2 : 0.6,
                 alarmBalloon : 0.5,
             });

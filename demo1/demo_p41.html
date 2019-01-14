@@ -87,6 +87,25 @@
             group.addChild(from);
             group.addChild(to);
             group.addChild(nodeC);
+
+            network.addInteractionListener(function (e) {
+                //是否是双击
+                if (e.kind=="doubleClickElement"){
+                    var select = network.getSelectionModel().getLastData();//获取选中的数据
+                    console.log(Date(),select);
+                    if (select instanceof  twaver.Node){
+                        console.log("Node");
+                    }
+                    if (select instanceof  twaver.Group){
+                        console.log("Group");
+                    }
+                    if (select instanceof  twaver.Link){
+                        console.log("Link");
+                    }
+
+                }
+
+            })
         }
     </script>
 

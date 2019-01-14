@@ -26,8 +26,8 @@
             var layer2 = new twaver.Layer('uneditable', 'uneditable layer');
             layer2.setEditable(false);
             var layer3 = new twaver.Layer('unvisible', 'unvisible Layer');
-            layer3.setVisible(false); layerBox.add(layer1); layerBox.add(layer2);
-            layerBox.add(layer3);
+            layer3.setVisible(true); layerBox.add(layer3); layerBox.add(layer2);
+            layerBox.add(layer1);
             createNode(layer1, 'circle', 300, 100, 200, 200, '#57ab9a');
             createNode(layer2, 'diamond', 350, 200, 200, 200, '#ef8200');
             createNode(layer3, 'rectangle', 200, 200, 200, 200, '#ec6c00');
