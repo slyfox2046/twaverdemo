@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P21</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script>
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+
+        function init() {
+            initNetwork();
+            initDataBox();
+        }
+
+        function initNetwork() {
+            var view = network.getView();
+            document.body.appendChild(view);
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+        }
+
+        function initDataBox() {
+            var from = new twaver.Node({
+                name: 'from',
+                location: {
+                    x: 100,
+                    y: 100
+                }
+            });
+            box.add(from);
+            var to = new twaver.Node({
+                name: 'to',
+                location: {
+                    x: 300,
+                    y: 300
+                }
+            });
+            box.add(to);
+            var link = new twaver.Link(from, to);
+            link.setName('link1');
+            link.s('link.color', '#238475');
+            // link.s('link.color', 'red');
+            link.s('label.xoffset', -10);
+            link.s('label.yoffset', -10);
+            box.add(link);
+            var link = new twaver.Link(from, to);
+            link.setName('link2');
+            link.s('link.color', '#238475');
+            box.add(link);
+            var link = new twaver.Link(from, to);
+            link.setName('link3');
+            link.s('label.xoffset', 10);
+            link.s('label.yoffset', 10);
+            link.s('link.color', '#238475');
+            box.add(link);
+            var link = new twaver.Link(from, to);
+            link.setName('link4');
+            link.s('label.xoffset', 10);
+            link.s('label.yoffset', 20);
+            link.s('link.color', '#238475');
+            box.add(link);
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+
+
+</body>
+</html>

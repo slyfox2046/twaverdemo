@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P21</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script>
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        function init() {
+            initNetwork();
+            initDataBox();
+        }
+        function initNetwork() {
+            var view = network.getView();
+            document.body.appendChild(view);
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+            twaver.Styles.setStyle('select.color', '#57ab9a');
+        }
+        function initDataBox() {
+            var shapeNode1 = new twaver.ShapeNode({
+                name:'ShapeNode1',
+            });
+            shapeNode1.s('vector.fill.color','#61b6d8');
+            shapeNode1.s('vector.gradient','radial.center');
+            shapeNode1.addPoint({
+                x : 30,
+                y : 10
+            });
+            shapeNode1.addPoint({
+                x : 80,
+                y : 10
+            });
+            shapeNode1.addPoint({
+                x : 100,
+                y : 90
+            });
+            shapeNode1.addPoint({
+                x : 10,
+                y : 90
+            });
+            shapeNode1.addPoint({
+                x : 30,
+                y : 10
+            });
+            box.add(shapeNode1);
+            var shapeNode2 = new twaver.ShapeNode();
+            shapeNode2.setName('shapeNode2');
+            shapeNode2.addPoint({
+                x : 130,
+                y : 110
+            });
+            shapeNode2.addPoint({
+                x : 180,
+                y : 110
+            });
+            shapeNode2.addPoint({
+                x : 200,
+                y : 190
+            });
+            shapeNode2.addPoint({
+                x : 110,
+                y : 190
+            });
+            shapeNode2.addPoint({
+                x : 130,
+                y : 110
+            });
+            shapeNode2.s('vector.fill.color','#ec6c00');
+            shapeNode2.s('vector.gradient','radial.east');
+            var segments = new twaver.List();
+            segments.add("moveto");
+            segments.add("quadto");
+            segments.add("quadto");
+            shapeNode2.setSegments(segments);
+            box.add(shapeNode2);
+            var link = new twaver.Link(shapeNode1, shapeNode2);
+            box.add(link);
+        }
+    </script>
+
+</head>
+<body onload="init()">
+
+
+</body>
+</html>

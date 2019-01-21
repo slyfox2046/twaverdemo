@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        function init() {
+            initNetwork();
+            initDataBox();
+        }
+        function initNetwork() {
+            var view = network.getView();
+            document.body.appendChild(view);
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+            network.setEditInteractions();
+            network.setVisibleFunction(function (element) {
+                if (element.getClient("visible") == false) {
+                    return false;
+                }
+                return true;
+            });
+            network.setEditableFunction(function (element) {
+                if (element.getClient('editable') == false) {
+                    return false;
+                }
+                return true;
+            });
+            network.setMovableFunction(function (element) {
+                if (element.getClient('movable') == false) {
+                    return false;
+                }
+                return true;
+            });
+        }
+        function initDataBox() {
+            var node = new twaver.Node();
+            node.setName("unmovable");
+            node.setLocation(50, 60);
+            node.setClient('movable',false);
+            box.add(node);
+            var node1 = new twaver.Node();
+            node1.setName("unvisible");
+            node1.setLocation(60, 90);
+            node1.setClient("visible", false);
+            box.add(node1);
+            var node2 = new twaver.Node();
+            node2.setName("node2");
+            node2.setLocation(80, 100);
+            box.add(node2);
+            var node3 = new twaver.Node();
+            node3.setName("node3");
+            node3.setLocation(120, 210);
+            box.add(node3);
+            var link = new twaver.Link(node2,node3);
+            box.add(link);
+            var group = new twaver.Group();
+            group.setName('unEditable');
+            group.setExpanded(true);//默认展开
+
+            //一直展开
+            group.isExpanded = function(){
+                return true;
+            }
+            group.addChild(node3);
+            group.addChild(node2);
+            group.setClient('editable',false);
+            group.s('group.fill.color','#ef8200');
+            box.add(group);
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+
+</body>
+
+</html>
