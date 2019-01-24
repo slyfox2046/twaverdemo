@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../common/jquery/jquery.js"></script>
 </head>
-<script>
+<script type="text/javascript">
+    $(function() {
+        var a= [];
+        for (let i = 0; i < 10; i++) {
+            a [i] = function () {
+                console.log(i);
+            }
+        }
+        a[6]();
+    //
+    //     var tmp = 123;
+    //
+    //     if (true) {
+    //         tmp = 'abc'; // ReferenceError
+    //         let tmp;
+    //         console.log(tmp);
+    //     }
+
+
+    })
+
 
 </script>
 
 <body>
+<div>
 
+</div>
 </body>
 </html>
