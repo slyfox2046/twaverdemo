@@ -3,31 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        ul, li {
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="../common/bootstrap-3.3.7/dist/css/bootstrap.css">
+    <script src="../common/jquery/jquery.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../common/bootstrap-3.3.7/dist/js/bootstrap.js"></script>
 
-        #myMenu{
-            list-style: none;
-            width: 150px;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            position: absolute;
-            display: none;
-        }
+    <!--<style>-->
+        <!--ul, li {-->
+            <!--margin: 0;-->
+            <!--padding: 0;-->
+        <!--}-->
 
-        #myMenu li{
-            border-bottom: 1px solid #ccc;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+        <!--#myMenu{-->
+            <!--/*list-style: none;*/-->
+            <!--/*width: 150px;*/-->
+            <!--/*border: 1px solid #ccc;*/-->
+            <!--/*border-bottom: none;*/-->
+            <!--/*position: absolute;*/-->
+            <!--/*display: none;*/-->
+            <!--position: absolute;-->
+            <!--top: 100%;-->
+            <!--left: 0;-->
+            <!--z-index: 1000;-->
+            <!--display: none;-->
+            <!--float: left;-->
+            <!--min-width: 160px;-->
+            <!--padding: 5px 0;-->
+            <!--margin: 2px 0 0;-->
+            <!--font-size: 14px;-->
+            <!--text-align: left;-->
+            <!--list-style: none;-->
+            <!--background-color: #fff;-->
+            <!-- -webkit-background-clip: padding-box;-->
+            <!--background-clip: padding-box;-->
+            <!--border: 1px solid #ccc;-->
+            <!--border: 1px solid rgba(0,0,0,.15);-->
+            <!--border-radius: 4px;-->
+            <!-- -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);-->
+            <!--box-shadow: 0 6px 12px rgba(0,0,0,.175);-->
 
-        #myMenu li:hover{
-            background-color: #ccc;
-        }
-    </style>
+
+        <!--}-->
+
+        <!--#myMenu li{-->
+            <!--border-bottom: 1px solid #ccc;-->
+            <!--padding: 5px 10px;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+
+        <!--#myMenu li:hover{-->
+            <!--background-color: #ccc;-->
+        <!--}-->
+    <!--</style>-->
 
 </head>
 <script>
@@ -37,7 +64,7 @@
         var myMenu = document.getElementById("myMenu");
         myMenu.style.display = "block";
         //获取鼠标视口位置
-        myMenu.style.top = event.clientY -10+ "px";
+        myMenu.style.top = event.clientY - 100+ "px";
         myMenu.style.left = event.clientX-10 + "px";
     });
 
@@ -50,11 +77,25 @@
 </script>
 <body>
 <div>Hello contextMenu</div>
-<ul id="myMenu" onmouseleave="this.style.display='none'">
+<ul id="myMenu1" onmouseleave="this.style.display='none'">
     <li>右键想干什么？</li>
     <li>想看源代码？</li>
     <li>还是想审查元素？</li>
 </ul>
+
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+    </button>
+    <ul id="myMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1" onmouseleave="this.style.display='none'"  >
+        <li><a href="#" onclick="console.log();">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</div>
 
 
 </body>

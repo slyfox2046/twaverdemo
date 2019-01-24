@@ -4,24 +4,36 @@
 <html style="height: 100%">
 
 <style type="text/css">
-    /*css代码*/
-    #struct_menu{
-        width: 0; /*设置为0 隐藏自定义菜单*/
-        overflow: hidden; /*隐藏溢出的元素*/
-        box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
-        position: absolute; /*自定义菜单相对与body元素进行定位*/
-        background-color: white;
-        z-index: 999;
-    }
-    .menu{
-        width: 130px;
-        line-height: 25px;
-        padding: 0 10px;
-    }
+    /*ul, li {*/
+        /*margin: 0;*/
+        /*padding: 0;*/
+    /*}*/
+
+    /*#myMenu{*/
+        /*background-color: #fff;*/
+        /*list-style: none;*/
+        /*width: 150px;*/
+        /*border: 1px solid #ccc;*/
+        /*border-bottom: none;*/
+        /*position: absolute;*/
+        /*display: none;*/
+    /*}*/
+
+    /*#myMenu li{*/
+        /*border-bottom: 1px solid #ccc;*/
+        /*padding: 5px 10px;*/
+        /*cursor: pointer;*/
+    /*}*/
+
+    /*#myMenu li:hover{*/
+        /*background-color: #ccc;*/
+    /*}*/
+
 </style>
 
 <head>
     <meta charset="utf-8">
+    <link href="../common/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body style="height: 100%; margin: 0">
 <div id="id1" style="height:100px">
@@ -31,30 +43,25 @@
 <div id="container">
 
 </div>
-<div id="struct_menu">
-    <p>&nbsp;</p>
-    <ul>
-        <li style="list-style-type: none">
-            <ul>
-                <li id="struct_add"><span style="color: black; font-size: small;">新建单位</span></li>
-            </ul>
-        </li>
-    </ul>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-</div>
 
-<div id="menuuu"  onMouseLeave ="this.style.display = 'none';">
-    <ul><!--右键弹出菜单-->
-        <li id="menu_blood" onClick="alert('血缘分析');" onMouseOver="this.style.background = '#999999';" onMouseOut="this.style.background = '#CCCCCC';">
-            <img src="menu_blood.png" /><font>血缘分析</font>
-        </li>
-        <li id="menu_influence" onClick="alert('影响分析');" onMouseOver="this.style.background = '#999999';" onMouseOut="this.style.background = '#CCCCCC';">
-            <img src="menu_influence.png" /><font>影响分析</font>
-        </li>
-    </ul>
-</div>
-<script type="text/javascript" src="../jq/jquery-1.8.2.js"></script>
+<!--<ul id="myMenu" onmouseleave="this.style.display='none'">-->
+    <!--<li onclick="console.log('alert1');">右键想干什么？</li>-->
+    <!--<li onclick="console.log('alert2'); document.getElementById('myMenu').style.display='none'">想看源代码？</li>-->
+    <!--<li onclick="alert('alert3');">还是想审查元素？</li>-->
+<!--</ul>-->
+
+<ul id="myMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1" onmouseleave="this.style.display='none'"  >
+    <li><a href="#" onclick="foo(1);">Action</a></li>
+    <li><a href="#" onclick="foo(2)">Another action</a></li>
+    <li><a href="#" onclick="foo(3)">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#" onclick="foo(4)">Separated link</a></li>
+</ul>
+
+<!--<script type="text/javascript" src="../jq/jquery-1.8.2.js"></script>-->
+<script type="text/javascript" src="../common/jquery/jquery.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script type="text/javascript" src="../common/bootstrap-3.3.7/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="../lib/underscore.js"></script>
 <script type="text/javascript" src="../lib/echarts.js"></script>
 <script type="text/javascript" src="./data1.js"></script>
@@ -94,6 +101,16 @@
 
     // 鼠标事件包括 'click'、'dblclick'、'mousedown'、'mousemove'、'mouseup'、'mouseover'、'mouseout'、'globalout'、'contextmenu'。
 
+    //start 左键单击
+    //@desc 功能描述
+    myChart.on('click', function () {
+        alert("这个是点击左键");
+
+    });
+
+    //end of 左键单击
+
+
     //start 右键菜单
     //@desc 右键菜单
     myChart.on('contextmenu', showMenu);
@@ -103,13 +120,32 @@
     container.oncontextmenu = function() { return false; };
     //2. 定义方法
     function showMenu(param){
+
         console.log('p==============',param);
-        var menu = document.getElementById("struct_menu");
-        var event = param.event;
+        var menu = document.getElementById("myMenu");
+        // var event = param.event;
         console.log(event.offsetX,event.offsetY);
-        menu.style.left = event.offsetX + 'px';
-        menu.style.top = event.offsetY + 20 + 'px';
+        menu.style.left = event.offsetX +10+ 'px';
+        menu.style.top = event.offsetY + 80 + 'px';
         menu.style.display = "block";
+    }
+
+    //3. 点击后隐藏菜单
+    function hideMenu() {
+        var menu = document.getElementById("myMenu");
+        menu.style.display = "none";
+    }
+
+    //4.右键按钮具体实现的业务
+    function foo(n) {
+        switch (n) {
+            case 1:console.log("right 1");hideMenu(); break;
+            case 2:console.log("right 2");hideMenu(); break;
+            case 3:console.log("right 3");hideMenu(); break;
+            case 4:console.log("right 4");hideMenu(); break;
+            default:break;
+        }
+
     }
 
     //end of 右键菜单
