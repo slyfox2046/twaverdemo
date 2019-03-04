@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        var autoLayouter = new twaver.layout.AutoLayouter(box);
+
+        function init() {
+            var main = document.getElementById('main');
+            main.appendChild(network.getView());
+            network.adjustBounds({
+                x: 0,
+                y: 30,
+                width: 1500,
+                height: 700
+            });
+            twaver.Styles.setStyle("link.bundle.expanded", false);
+            twaver.Styles.setStyle("link.width", 1);
+            var self = this;
+            var callback = function (e) {
+                if (e.kind === 'validateEnd') {
+                    self.network.removeViewListener(callback);
+                    roundLayout(function(){
+                        network.zoomOverview();}
+                    )
+                    // treeLayout(); //如果要显示treeLayout 取消注释
+                }
+            };
+            network.addViewListener(callback);
+            initBox();
+            initListener();
+        }
+        function initListener() {
+            network.addInteractionListener(function (e) {
+                if (e.kind == 'lazyMoveEnd' || e.kind == 'liveMoveEnd') {
+                    var currentNode = network.getElementBox().getSelectionModel().getLastData();
+                    var center = box.getDataById('center');
+                    console.log(center);
+                    var cx = center.getCenterLocation().x;
+                    var cy = center.getCenterLocation().y;
+                    var x = currentNode.getCenterLocation().x;
+                    var y = currentNode.getCenterLocation().y;
+                    var distance = Math.sqrt(Math.pow((cx - x), 2) + Math.pow((cy - y), 2));
+                    var level = currentNode.getClient('level');
+                    box.setClient("radius", distance / Math.pow(1.5, level));
+                    roundLayout();
+                }
+            });
+        }
+
+        function initBox() {
+            var center = new twaver.Node("center");
+            center.setClient('center', 'center');
+            this.box.add(center);
+            for (var i = 0; i < 56; i++) {
+                var node = new twaver.Node();
+                this.box.add(node);
+                var link = new twaver.Link(node, center);
+                this.box.add(link);
+            }
+            var sizes = [];
+            this.box.forEach(function (element) {
+                if (element instanceof twaver.Node) {
+                    sizes.push(element.getLinks().size());
+                }
+            });
+            Array.max = function (array) {
+                return Math.max.apply(Math, array);
+            }
+            this.box.forEach(function (element) {
+                if (element instanceof twaver.Node) {
+                    if (Array.max(sizes) == element.getLinks().size()) {
+                        element.setClient('center', 'center');
+                    }
+                }
+            });
+        }
+
+        function random(min, max) {
+            return Math.floor(min + Math.random() * (max - min));
+        }
+
+        function getCRound(N) {
+            //获取窗口高度
+            if (window.innerHeight)
+                winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight;
+            //var height = network.viewRect.height;
+            return parseInt(30 * N / winHeight);
+        }
+        function roundLayout(callback) {
+            var datas = box.getDatas().toArray();
+            var size = box.getDatas().toArray().length;
+            //获取窗口宽度
+            if (window.innerWidth)
+                winWidth = window.innerWidth;
+            else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+            //获取窗口高度
+            if (window.innerHeight)
+                winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight;
+            var centerX = winWidth / 2;//圆心坐标
+            var centerY = winHeight / 2;
+            var radius = 0;//半径
+            var N = 0; //total number of node
+            box.forEach(function (data) {
+                if (data.getClient('center') !== undefined) {
+                    data.setCenterLocation(centerX, centerY);
+                }
+                if (data instanceof twaver.Node && data.getClient('center') == undefined) {
+                    N++;
+                }
+            });
+            var c = getCRound(N);
+            var i = 0;
+            var n = parseInt(N / c);
+            radius = network.viewRect.height / 2 / c - 30 / c;
+            if (box.getClient("radius")) {
+                radius = parseInt(box.getClient("radius"));
+            }
+            box.forEach(function (data) {
+                if (data instanceof twaver.Node && data.getClient('center') == undefined) {
+                    var e = parseInt(i / n);
+                    var x = centerX + (radius * Math.pow(1.5, e) * Math.cos(Math.PI * 2 / n * i + 0.2 * e));
+                    var y = centerY + (radius * Math.pow(1.5, e) * Math.sin(Math.PI * 2 / n * i + 0.2 * e));
+                    i++;
+                    data.setCenterLocation(x, y);
+                    data.setClient('level', e);
+                }
+            });
+            if(callback){
+                _twaver.callLater(callback);
+            }
+        }
+
+        function treeLayout() {
+            var datas = box.getDatas().toArray();
+            var size = box.getDatas().toArray().length;
+            if (window.innerWidth)
+                winWidth = window.innerWidth;
+            else if ((document.body) && (document.body.clientWidth))
+                winWidth = document.body.clientWidth;
+            //获取窗口高度
+            if (window.innerHeight)
+                winHeight = window.innerHeight;
+            else if ((document.body) && (document.body.clientHeight))
+                winHeight = document.body.clientHeight;
+            var centerX = winWidth / 2;//圆心坐标
+            var centerY = 30;
+            var radius = 0;//半径
+            var N = 0; //total number of node
+            box.forEach(function (data) {
+                if (data.getClient('center') !== undefined) {
+                    data.setCenterLocation(centerX, centerY);
+                }
+                if (data instanceof twaver.Node && data.getClient('center') == undefined) {
+                    N++;
+                }
+            });
+            var c = getCRound(N);
+            var i = 0;
+            var n = parseInt(N / c);
+            radius = network.viewRect.height / 2 / c - 30 / c;
+            box.forEach(function (data) {
+                if (data instanceof twaver.Node && data.getClient('center') == undefined) {
+                    var e = parseInt(i / n);
+                    var u = i % n;
+                    var x = centerX + (u - n / 2) * 40;
+                    var y = centerY + (radius * Math.pow(2, e));
+                    i++;
+                    data.setCenterLocation(x, y);
+                }
+            });
+        }
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>
