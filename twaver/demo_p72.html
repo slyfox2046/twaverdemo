@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+
+        //工具栏
+        var toolbar = document.createElement('div');
+        var autoLayouter = new twaver.layout.AutoLayouter(box);
+        //springlayouter 弹簧布局
+        var springLayouter = new twaver.layout.SpringLayouter(network);
+
+        function init() {
+            registerImage();
+            initToolbar();
+            initNetwork();
+            initBox();
+        }
+
+        function registerImage() {
+            twaver.Util.registerImage('circle',{
+                w:50,
+                h:50,
+                line:{
+                    width:1,
+                    color:twaver.Colors.orange_dark
+                },
+                fill:twaver.Colors.orange_dark,
+                v:[{
+                    shape:'circle',
+                    cx:0,
+                    cy:0,
+                    r:25
+                }]
+            });
+            twaver.Util.registerImage('circle2',{
+                w:50,
+                h:50,
+                line:{
+                    width:1,
+                    color:twaver.Colors.orange_dark
+                },
+                fill:twaver.Colors.green_light,
+                v:[{
+                    shape:'circle',
+                    cx:0,
+                    cy:0,
+                    r:25
+                }]
+            });
+            twaver.Util.registerImage('circle3',{
+                w:20,
+                h:20,
+
+                fill:twaver.Colors.blue_light,
+                v:[{
+                    shape:'circle',
+                    cx:0,
+                    cy:0,
+                    r:10
+                }]
+            });
+
+        }
+        function initNetwork(){
+            //toobar的一个pane
+            var pane = new twaver.controls.BorderPane(network, toolbar);
+            //toobar高25px
+            pane.setTopHeight(25);
+            var view = pane.getView();
+            view.style.left = '0px';
+            view.style.top = '0px';
+            view.style.right = '0px';
+            view.style.bottom = '0px';
+            document.body.appendChild(view);
+            window.onresize = function () {
+                pane.invalidate(); //window窗口大小变化时
+            };
+            twaver.Styles.setStyle('link.color',twaver.Colors.blue_dark);
+            autoLayouter.setRepulsion(0.1);//斥力系数
+            network.setMinZoom(0.0001); //缩放的设置
+
+        }
+        function initToolbar() {
+            var repulsion = addInput("Repulsion");//html input 框
+            toolbar.appendChild(repulsion); //toolbar添加input框
+            repulsion.oninput=function(){
+                autoLayouter.setRepulsion(repulsion.value);
+                autoLayouter.doLayout(autoLayouterType.value); //设置布局类型twaver的函数
+            }
+            //checkhbox html
+            var animation = addCheckBox(toolbar, false, "Animation", function () {
+                autoLayouter.setAnimate(animation.checked);
+                doLayout(zoomToOverview.value, autoLayouterType.value);  //自定义的doLayouter
+            });
+            animation.checked = autoLayouter.isAnimate();
+            var zoomToOverview = addCheckBox(toolbar, false, "Overview", function () {
+                doLayout(zoomToOverview.value, autoLayouterType.value); //自定义的doLayouter
+            });
+            var autoLayouterType = document.createElement('select');
+            var items = ['round', 'symmetry', 'topbottom', 'bottomtop', 'leftright', 'rightleft', 'hierarchic'];
+            items.forEach(function (item) {
+                var option = document.createElement('option');
+                option.appendChild(document.createTextNode(item));
+                option.setAttribute('value', item);
+                autoLayouterType.appendChild(option);
+            });
+
+            autoLayouterType.addEventListener('change', function () {
+                doLayout(zoomToOverview.value, autoLayouterType.value);
+            }, false);
+            toolbar.appendChild(autoLayouterType);
+            var start = addButton(toolbar, 'Start', null, function () {
+                var isRunning = springLayouter.isRunning();
+                if (isRunning) {
+                    springLayouter.stop();
+                    start.value = 'Start';
+                } else {
+                    springLayouter.start();
+                    start.value = 'Stop';
+                }
+            });
+        }
+
+        //
+        function doLayout (overview,type) {
+            if (document.getElementById("Animation").checked) {
+                autoLayouter.setAnimate(true);
+            } else {
+                autoLayouter.setAnimate(true); //这里是否有错误
+            }
+            if (overview) {
+                autoLayouter.doLayout(type, function () {
+                    network.zoomOverview(false);
+                });
+            } else {
+                autoLayouter.doLayout(type);
+            }
+        }
+
+        //添加checkbox
+        function addCheckBox(div, checked, name, callback) {
+            var checkBox = document.createElement('input');
+            checkBox.id = name;
+            checkBox.type = 'checkbox';
+            checkBox.style.padding = '4px 4px 4px 4px';
+            checkBox.checked = checked;
+            if (callback) checkBox.addEventListener('click', callback, false);
+            div.appendChild(checkBox);
+            var label = document.createElement('label');
+            label.htmlFor = name;
+            label.innerHTML = name;
+            div.appendChild(label);
+            return checkBox;
+        }
+
+        //添加按钮
+        function addButton(div, name, src, callback) {
+            var button = document.createElement('input');
+            button.setAttribute('type', src ? 'image' : 'button');
+            button.setAttribute('title', name);
+            button.style.verticalAlign = 'top';
+            if (src) {
+                button.style.padding = '4px 4px 4px 4px';
+                if (src.indexOf('/') < 0) {
+                    src = '../images/toolbar/' + src + '.png';
+                }
+                button.setAttribute('src', src);
+            } else {
+                button.value = name;
+            }
+            button.addEventListener('click', callback, false);
+            div.appendChild(button);
+            return button;
+        }
+
+        function initBox() {
+            for (var i = 0, n = 1; i < n; i++) {
+                var center = new twaver.Node({name: '' + box.size(),id:"ID"+i});
+                center.setImage("circle");
+                box.add(center);
+                for (var j = 0, c = 10; j < c; j++) {
+                    var node = new twaver.Node({name: '' + box.size()});
+                    node.setImage('circle');
+                    node.setClient('edge',true);
+                    box.add(node);
+                    var link = new twaver.Link({name: '' + box.size()}, center, node);//中心园和其它周围10个节点
+                    box.add(link);
+                    for(var k=0;k<8;k++){
+                        var node2 = new twaver.Node();
+                        node2.setImage('circle2');
+                        box.add(node2);
+                        var link = new twaver.Link(node,node2);
+                        box.add(link);
+                        for(var m = 0;m<10;m++){
+                            var node3 = new twaver.Node();
+                            node3.setImage('circle3');
+                            box.add(node3);
+                            var link = new twaver.Link(node2,node3);
+                            box.add(link);
+                        }
+                    }
+                }
+            }
+            autoLayouter.doLayout('round',function(){
+            });
+        }
+        //input的html绘画
+        function addInput(name) {
+            var input = document.createElement('input');
+            if (!twaver.Util.isIE) {
+                input.type = 'number';
+            }
+            input.id = name;
+            input.min = 0;
+            input.max = 10;
+            input.step = 0.1;
+            input.value = 0.1;
+            var label = document.createElement('label');
+            label.htmlFor = name;
+            label.innerHTML = name;
+            this.toolbar.appendChild(label);
+            this.toolbar.appendChild(input);
+            return input;
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+<div id="main"></div>
+
+</body>
+
+</html>
