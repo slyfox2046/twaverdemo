@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+
+        //工具栏
+        var toolbar = document.createElement('div');
+        var autoLayouter = new twaver.layout.AutoLayouter(box);
+        var bounds = null;
+        function init() {
+            initToolbar();
+            initNetwork();
+            initBox();
+        }
+        function initNetwork(){
+            var pane = new twaver.controls.BorderPane(network, toolbar);
+            pane.setTopHeight(25);
+            var view = pane.getView();
+            view.style.left = '0px';
+            view.style.top = '0px';
+            view.style.right = '0px';
+            view.style.bottom = '0px';
+            document.body.appendChild(view);
+            window.onresize = function () {
+                split.invalidate();
+            };
+        }
+        function initToolbar() {
+            //添加checkbox
+            var zoomToOverview = addCheckBox(toolbar, false, "Overview", function () {
+                doLayout(zoomToOverview.value,autoLayouterType.value);
+            });
+
+            //添加下拉框
+            var autoLayouterType = document.createElement('select');
+            var items = ['round', 'symmetry', 'topbottom', 'bottomtop', 'leftright', 'rightleft', 'hierarchic'];
+            items.forEach(function (item) {
+                var option = document.createElement('option');
+                option.appendChild(document.createTextNode(item));
+                option.setAttribute('value', item);
+                autoLayouterType.appendChild(option);
+            });
+            autoLayouterType.addEventListener('change', function () { doLayout(zoomToOverview.value,autoLayouterType.value); }, false);
+
+            //工具栏添加元素
+            toolbar.appendChild(autoLayouterType);
+        }
+
+        //
+        function doLayout (overview,type) {
+            if (overview) {
+                autoLayouter.doLayout(type, function () {
+                    network.zoomOverview(false);
+                });
+            } else {
+                autoLayouter.doLayout(type);
+            }
+        }
+
+        //添加checkbox
+        function addCheckBox (div, checked, name, callback) {
+            var checkBox = document.createElement('input');
+            checkBox.id = name;
+            checkBox.type = 'checkbox';
+            checkBox.style.padding = '4px 4px 4px 4px';
+            checkBox.checked = checked;
+            if (callback) checkBox.addEventListener('click', callback, false);
+            div.appendChild(checkBox);
+            var label = document.createElement('label');
+            label.htmlFor = name;
+            label.innerHTML = name;
+            div.appendChild(label);
+            return checkBox;
+        }
+
+        function initBox() {
+            for (var i = 0, n = 1; i < n; i++) {
+                var group = new twaver.Node({name: '' + box.size()});
+                box.add(group);
+                for (var j = 0, c = 25; j < c; j++) {
+                    var node = new twaver.Node({name: '' + box.size()});
+                    group.addChild(node);
+                    box.add(node);
+                    var link = new twaver.Link({name: '' + box.size()}, group, node);
+                    group.addChild(link);
+                    box.add(link);
+                }
+            }
+            autoLayouter.doLayout('symmetry');
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+<div id="main"></div>
+
+</body>
+
+</html>

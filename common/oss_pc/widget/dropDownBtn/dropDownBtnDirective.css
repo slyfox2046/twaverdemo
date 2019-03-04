@@ -1,0 +1,63 @@
+﻿.db_blockBtn {
+    display: flex;
+    align-items: center;
+    padding: 1px;
+    background: #fff;
+    height: 27px;
+    justify-content: space-between;
+    border-radius: 4%;
+    line-height: 10px;
+    border: 1px solid #e1e1e1;
+}
+
+.db_btn {
+    margin-left: 10px;
+    color: #666;
+    font-size: 12px;
+}
+.db_arrow{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.db_dowm {
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    margin-top: 7px;
+    border-style: solid;
+    border-color: #666 transparent transparent transparent;
+}
+
+.db_up {
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    margin-top: 0px;
+    margin-top: -9px;
+    border-style: solid;
+    border-color: transparent transparent #666 transparent;
+}
+
+.db_selectSpan {
+    padding: 5px;
+    font-size: 12px;
+    padding-left: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.db_selectSpan:hover {
+    border: 1px solid #4db2ee;
+    color: #4db2ee;
+}
+
+.db_content {
+    position: absolute;
+    background: white;
+    width: 88px;
+    z-index: 9999;
+    min-height: 10px; /*100px;*/
+    color: #666;
+    border: 1px solid #e1e1e1;
+}

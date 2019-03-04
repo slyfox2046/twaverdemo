@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box;
+        var number;
+        function init() {
+            number = 0;
+            var network = new twaver.vector.Network();              //新建network
+            network.setToolTipEnabled(true);                        //设置提示
+            box = network.getElementBox();                          //挂至box
+            var tree = new twaver.controls.Tree(box);               //新建1棵树
+            var group = new twaver.Group();                         //新建组
+            group.setName("group");                                 //设置组名称
+            box.add(group);                                         //组添加到box中
+            group.addChild(createTWaverNode("node1", 200, 100));    //组中添加子元素1
+            group.addChild(createTWaverNode("node2", 300, 130));    //组中添加子元素2
+            group.setExpanded(true);                                //默认设置展开组
+            var from = createTWaverNode("from", 30, 30);            //调用createTWaverNode 创建from节点，附带告警信息
+            var to = createTWaverNode("to", 70, 150);               //调用createTWaverNode 创建to节点，附带告警信息
+            var link = new twaver.Link(from, to);                   //from to 建立link
+            link.setName("hello TWaver HTML5");                     //link设置名称
+            box.add(link);                                          //box添加link
+            //树节点自身渲染颜色 (直接设置了)
+            tree.getInnerColor = function(data) {
+                // return "#ff0000";
+                return twaver.Colors.blue_dark;
+            };
+            //树节点边框颜色
+            tree.getOuterColor = function(data) {
+                // return "#00ff00";
+                return twaver.Colors.orange_dark;
+            };
+            //左下方小球的颜色,如果为null表示不显示
+            tree.getAlarmFillColor = function(data) {
+                if (data instanceof twaver.Element && !data.getAlarmState().isEmpty()) {
+                    // return "#0000ff";
+                    return twaver.Colors.orange_light;
+                    // return twaver.Colors.blue_dark;
+                }
+                return null;
+            };
+            // network是同样的道理，同样的默认实现,
+            // innerColor - 节点渲染色
+            // outerColor - 边框颜色
+            // alarmFillColor - 告警冒泡颜色，如果下面的告警文本为空，告警冒泡不显示
+            // alarmLabel - 告警文本
+            // Body 渲染色
+            network.getInnerColor = function(data) {
+                // return "#ff0000";
+                return twaver.Colors.blue_light;
+            };
+            // 节点边框颜色
+            network.getOuterColor = function(data) {
+                // return "#00ff00";
+                return twaver.Colors.orange_dark;
+            };
+            // 告警冒泡的颜色，如果下面相应的alarmlable返回null或者颜色为null不显示
+            network.getAlarmFillColor = function(data) {
+                if (data instanceof twaver.Element && !data.getAlarmState().isEmpty()) {
+                    // return "#0000ff";
+                    return twaver.Colors.green_light;
+                }
+                return null;
+            };
+            network.getAlarmLabel = function(element) {
+                if (!element.getAlarmState().isEmpty()) {
+                    return "alarmLabel";
+                }
+                return null;
+            };
+            network.getSelectColor = function(element) {
+                // return "#ffff00";
+                return twaver.Colors.gray_dark;
+            };
+            var treeDom = tree.getView();
+            treeDom.style.width = "150px";
+            treeDom.style.height = "100%";
+            // var networkDom = network.getView();
+            // networkDom.style.left = "150px";
+            // networkDom.style.width = "100%";
+            // networkDom.style.height = "100%";
+            var view = network.getView();
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+            document.body.appendChild(treeDom);
+        }
+
+        //创建节点的方法
+        function createTWaverNode(name, x, y) {
+            var node = new twaver.Node();
+            node.setName(name);
+            node.setToolTip(name);
+            node.getAlarmState().increaseNewAlarm(twaver.AlarmSeverity.MAJOR);
+            node.setClient("number", number++);
+            node.setLocation(x, y);
+            box.add(node);
+            return node;
+        }
+    </script>
+
+</head>
+<body onload="init()">
+<div id="main"></div>
+
+</body>
+
+</html>

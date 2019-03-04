@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script src="shadowInteraction.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        var toolbar = document.createElement('div');
+        function init() {
+            initNetwork();
+            initDataBox();
+            registerImage();
+        }
+        function initNetwork() {
+            var networkPane = new twaver.controls.BorderPane(network, toolbar);
+            networkPane.setTopHeight(25);
+            var view = networkPane.getView();
+            view.style.left = '0px';
+            view.style.top = '0px';
+            view.style.right = '0px';
+            view.style.bottom = '0px';
+            main.appendChild(view);
+            window.onresize = function () {
+                networkPane.invalidate();
+            };
+
+
+            var view = network.getView();
+            document.body.appendChild(view);
+            network.adjustBounds({x: 0, y: 0, width: 1300, height: 600});
+            network.setInteractions([
+                // new twaver.vector.interaction.SelectInteraction(network),
+                // new twaver.vector.interaction.MoveInteraction(network),
+                new shadowInteraction(network),
+                new twaver.vector.interaction.DefaultInteraction(network)
+            ]);
+        }
+        function registerImage() {
+//register shadow
+            twaver.Util.registerImage('shadow', {
+                w: 37,
+                h: 29,
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 5,
+                shadowColor: '#ec6c00',
+                v: [
+                    {
+                        shape: 'vector',
+                        name: 'node_image',
+                        x: 0,
+                        y: 0
+                    }
+                ]
+            });
+        }
+        function initDataBox() {
+            var from = new twaver.Node({
+                name: 'from',
+                location: {
+                    x: 100,
+                    y: 100
+                }
+            });
+            box.add(from);
+            var to = new twaver.Node({
+                name: 'to',
+                location: {
+                    x: 220,
+                    y: 160
+                }
+            });
+            box.add(to);
+            var link = new twaver.Link(from, to);
+            box.add(link);
+        }
+
+        function addButton(toolbar, label, src, handler) {
+            var button = document.createElement('input');
+            button.value = label;
+            button.onclick = handler;
+            button.setAttribute('type', src ? 'image' : 'button');
+            if (src) {
+                button.style.padding = '4px 4px 4px 4px';
+                if (src.indexOf('/') < 0) {
+                    src = '../images/toolbar/' + src + '.png';
+                }
+                button.setAttribute('src', src);
+            } else {
+                button.value = label;
+            }
+            toolbar.appendChild(button);
+        }
+
+
+        addButton(toolbar, 'Rack', 'rack_icon', function () {
+            network.setCreateElementInteractions(MyElement); });
+        // addButton(toolbar, 'Pan', 'pan', function () {
+        // });
+
+        MyElement = function (id) {
+            MyElement.superClass.constructor.call(this, id);
+            this.setStyle('body.type', 'vector');
+            this.setStyle('vector.shape', 'rectangle');
+            this.setStyle('vector.gradient', 'none');
+            // this.setStyle('vector.fill.color', '#C0C0C0');
+            this.setStyle('vector.fill.color', '#ff8800');
+            this.setStyle('vector.deep', 8);
+            this.setWidth(260);
+            this.setHeight(160);
+        };
+        twaver.Util.ext('MyElement', twaver.Follower);
+
+
+        //未实验成功
+        network.getView().addEventListener('mousemove', function (e) {
+            var target = self.network.hitTest(e);
+            if (target) {
+                if (target instanceof twaver.network.ElementUI) {
+                    console.log("划过一次");
+                    var testnode = self.network.getElementAt(e);
+                    alert(testnode.getName());
+                }
+// if (target instanceof twaver.network.LabelAttachment) {
+// console.log('clicked LabelAttachment');
+// }
+            }
+        });
+
+
+        //获取鼠标下的网元
+        network.getView().addEventListener('mousemove',function(e){
+            var element = network.getElementAt(e);
+            console.log(element);
+        })
+
+    </script>
+
+</head>
+<body onload="init()">
+<div id="main"></div>
+
+</body>
+
+</html>

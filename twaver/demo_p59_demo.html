@@ -28,7 +28,7 @@
             view.style.left = '0px';
             view.style.top = '0px';
             view.style.right = '0px';
-            view.style.bottom = '0px';
+            view.style.bottom = '0px';debugger
             main.appendChild(view);
             window.onresize = function () {
                 networkPane.invalidate();
@@ -89,6 +89,9 @@
             comboBox.setAttribute("id", "id1");
             comboBox.setAttribute("class", "select");
 
+            comboBox.setAttribute('style', 'margin-left: 20px ');
+            comboBox.setAttribute('style', 'margin-top: -30px ');
+
             // 取hashmap填充option
             var items = [1,2,3,4,5];
             items.forEach(function(item) {
@@ -118,7 +121,33 @@
             box.add(link);
         }
 
+        // 添加自定义按钮
+        addButton(toolbar, 'Clear', null, function () {
+            box.clear();
+            //可以派发自定义事件
+            network.fireInteractionEvent({ kind: 'ClearAllElement', element: null });
+        });
 
+        //可监听clear事件
+        network.addInteractionListener(function(e){
+            console.log("ClearAllElement事件：",e)
+        });
+
+        //通过toolbar创建网元的时候，可监听到网元创建成功的事件，可执行回调
+        addButton(toolbar, 'Rack', 'rack_icon', function () {
+            network.setCreateElementInteractions(Rack); });
+        addButton(toolbar, 'Shelf', 'shelf_icon', function () {
+            network.setCreateElementInteractions(Shelf); });
+        addButton(toolbar, 'Slot', 'slot_icon', function () {
+            network.setCreateElementInteractions(Slot); });
+        addButton(toolbar, 'Card', 'card_icon', function () {
+            network.setCreateElementInteractions(Card); });
+        addButton(toolbar, 'Port', 'port_icon', function () {
+            network.setCreateElementInteractions(Port); });
+        addButton(toolbar, 'LED', 'led_icon', function () {
+            network.setCreateElementInteractions(LED); });
+        addButton(toolbar, 'Text', 'text_icon', function () {
+            network.setCreateElementInteractions(Text); })
     </script>
 
 </head>
