@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aacbf6f9-7bad-41b1-a611-d9e0d7c6e0ca" name="Default Changelist" comment="twaverdemo">
-      <change afterPath="$PROJECT_DIR$/twaver/demo_p80.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_p82.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_p84.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_p85.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_p86.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd111.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd112.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd113.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd89.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd90.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twaver/demo_pd91.html" afterDir="false" />
+    <list default="true" id="aacbf6f9-7bad-41b1-a611-d9e0d7c6e0ca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/twaver/demo_pd129.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twaver/demo_pd132.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twaver/demo_pd137.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,42 +19,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/images/toolbar/ascend.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twaver/demo1.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="207">
               <caret line="9" selection-start-line="9" selection-end-line="12" selection-end-column="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/twaver/demo_p85.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/twaver/demo_pd89.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="65" column="49" lean-forward="true" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/twaver/demo_pd90.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="61" column="42" lean-forward="true" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -85,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twaver/demo_pd112.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="56" column="44" lean-forward="true" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+            <state relative-caret-position="345">
+              <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -97,17 +57,59 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twaver/demo_pd113.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
+            <state relative-caret-position="591">
               <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/twaver/demo_p86.html">
+        <entry file="file://$PROJECT_DIR$/twaver/demo_pd115.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="41" column="33" lean-forward="true" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+            <state relative-caret-position="292">
+              <caret line="77" column="44" lean-forward="true" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/twaver/demo_pd116.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="75" column="37" lean-forward="true" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+              <folding>
+                <element signature="e#2658#3286#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/twaver/demo_pd129.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="148" column="7" lean-forward="true" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/twaver/demo_pd132.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+              <folding>
+                <element signature="e#758#1315#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/twaver/demo_pd137.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -124,10 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>o</find>
-      <find>click</find>
-      <find>mychart</find>
-      <find>contextme</find>
       <find>contextmenu</find>
       <find>head</find>
       <find>foo</find>
@@ -145,7 +143,6 @@
       <find>width: &quot;30%</find>
       <find>city1</find>
       <find>clear</find>
-      <find>main</find>
       <find>select</find>
       <find>getElem</find>
       <find>overview</find>
@@ -154,6 +151,11 @@
       <find>addin</find>
       <find>edge</find>
       <find>tree</find>
+      <find>ocument.body.appendChild(network.getView())</find>
+      <find>main</find>
+      <find>LogicZoomManager</find>
+      <find>ZoomManager</find>
+      <find>setzoo</find>
     </findStrings>
     <replaceStrings>
       <replace>../common/angular-1.4.8</replace>
@@ -165,12 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/demo1/demo_p47.html" />
-        <option value="$PROJECT_DIR$/demo1/demo_p49.html" />
-        <option value="$PROJECT_DIR$/demo1/demo_p52.html" />
-        <option value="$PROJECT_DIR$/demo1/demo_p53.html" />
-        <option value="$PROJECT_DIR$/demo1/demo_p48.html" />
-        <option value="$PROJECT_DIR$/demo1/demo_p132.html" />
         <option value="$PROJECT_DIR$/demo1/demo_p132_demo.html" />
         <option value="$PROJECT_DIR$/demo1/demo_p132_demo2.html" />
         <option value="$PROJECT_DIR$/jq/4-1.html" />
@@ -216,6 +212,12 @@
         <option value="$PROJECT_DIR$/twaver/demo_pd111.html" />
         <option value="$PROJECT_DIR$/twaver/demo_pd113.html" />
         <option value="$PROJECT_DIR$/twaver/demo_pd112.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd114.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd116.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd129.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd132.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd138.html" />
+        <option value="$PROJECT_DIR$/twaver/demo_pd137.html" />
       </list>
     </option>
   </component>
@@ -343,7 +345,7 @@
       <workItem from="1551402863819" duration="1973000" />
       <workItem from="1551495574782" duration="661000" />
       <workItem from="1551666537542" duration="10997000" />
-      <workItem from="1551938638431" duration="8344000" />
+      <workItem from="1551938638431" duration="10546000" />
     </task>
     <task id="LOCAL-00001" summary="twaverdemo">
       <created>1546918100164</created>
@@ -471,11 +473,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551689032668</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="twaverdemo">
+      <created>1551947673525</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1551947673525</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="233531000" />
+    <option name="totallyTimeSpent" value="235733000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -509,38 +518,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="twaverdemo" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/ui_grid/css/ui-grid.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1878">
-          <caret line="1130" column="24" selection-start-line="1130" selection-start-column="24" selection-end-line="1130" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ugrid/demox.html" />
-    <entry file="file://$PROJECT_DIR$/common/ui_grid/js/ui-grid.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/ui_grid/osspage/skin/osspage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/oss_pc/widget/ui_grid/ui-grid.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26220">
-          <caret line="1140" column="16" selection-start-line="1140" selection-start-column="16" selection-end-line="1140" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/twaver/demo_p26.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -696,13 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/twaver/twaver-new.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="51" column="8772" selection-start-line="51" selection-start-column="8760" selection-end-line="51" selection-end-column="8772" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/twaver/demo_p132_demo2.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -815,13 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/twaver/demo_pd113.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/twaver/demo_pd111.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1281">
@@ -831,8 +794,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/twaver/demo_pd112.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="56" column="44" lean-forward="true" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+        <state relative-caret-position="345">
+          <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd115.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="77" column="44" lean-forward="true" selection-start-line="77" selection-start-column="44" selection-end-line="77" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd116.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="75" column="37" lean-forward="true" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+          <folding>
+            <element signature="e#2658#3286#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd129.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="148" column="7" lean-forward="true" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/twaver/twaver-new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="45" column="4060" selection-start-line="45" selection-start-column="4042" selection-end-line="45" selection-end-column="4060" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd113.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd132.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="35" column="13" lean-forward="true" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding>
+            <element signature="e#758#1315#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twaver/demo_pd137.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

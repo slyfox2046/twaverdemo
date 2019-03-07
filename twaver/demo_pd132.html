@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        function init() {
+            var box = new twaver.ElementBox();
+            var network = new twaver.vector.Network(box);
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x:0, y:0, width:700, height:700});
+
+            // network.setZoomManager(new twaver.vector.PhysicalZoomManager(network));//物理缩放
+            // network.setZoomManager(new twaver.vector.LogicalZoomManager(network));//逻辑缩放
+            network.setZoomManager(new twaver.vector.MixedZoomManager(network));//混合缩放
+            var x=300, y=300, r=200;
+            var center = new twaver.Node();
+            center.setLocation(x, y);
+            box.add(center);
+            var count=20;
+            for(var i=0;i<count; i++){
+                var node = new twaver.Node();
+                var angle = i * 2 * Math.PI / count ;
+                var radius = r*( i%2 * 0.5 + 0.5);
+                node.setLocation(x+radius*Math.cos(angle), y+radius*Math.sin(angle));
+                node.setLayerId('node');
+                box.add(node);
+                var link = new twaver.Link(center, node);
+                link.setStyle('link.width', 1);
+                link.setStyle('link.color', 'orange');
+                link.setLayerId('link');
+                box.add(link);
+            }
+            var linkLayer=new twaver.Layer('link');
+            box.getLayerBox().add(linkLayer);
+            box.getLayerBox().moveToTop(linkLayer);
+
+        }
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>
