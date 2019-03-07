@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var tree = new twaver.controls.Tree(box);
+        function init() {
+            initTreeView();
+            initDataBox();
+        }
+        function initTreeView() {
+            var treeDom = tree.getView();
+            treeDom.style.width = "100%";
+            treeDom.style.height = "100%";
+            document.body.appendChild(treeDom);
+            tree.expandAll();
+        }
+        function initDataBox() {
+            var group = new twaver.Group();
+            group.setName('Group');
+            group.setIcon('../images/toolbar/group_icon.png');
+            box.add(group);
+            for (var i = 0; i < 3; i++) {
+                var node1 = new twaver.Node({
+                    name:'Node-'+i,
+                    location:{
+                        x:100,
+                        y:200
+                    },
+                    // icon:'../images/node1.png'
+                    icon:'../images/toolbar/node_icon.png'
+                });
+                node1.setParent(group);
+                box.add(node1);
+                for(var j=0;j<3;j++){
+                    var node2 = new twaver.Node();
+                    node2.setName('Node-'+i+'-'+j);
+                    node2.getAlarmState().setNewAlarmCount(twaver.AlarmSeverity.MAJOR,1);
+                    node2.setParent(node1);
+                    box.add(node2);
+                }
+            }
+        }
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

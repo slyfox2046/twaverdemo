@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        function init(){
+            var box = new twaver.ElementBox();
+            var network = new twaver.vector.Network(box);
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x:0, y:0, width:800, height:700});
+
+            twaver.Util.registerImage('test_vector', {
+                w: 60,
+                h: 40,
+                v: [
+                    {
+                        shape: 'rect',
+                        x: -30,
+                        y: -20,
+                        w: 60,
+                        h: 40,
+                        lineColor: 'black',
+                        fill: '#309FC9',
+                        lineWidth: 1,
+                    }]
+            });
+            //Ļ以ĕ样ՇӚnode
+            var node1 = new twaver.Node();
+            node1.setName("Hello");
+            node1.setLocation(100, 100);
+            node1.setImage('test_vector');
+            box.add(node1);
+            //ģĻ以ĕ样ՇӚnode
+            var node2 = new twaver.Node({
+                name: 'Vector',
+                location: {
+                    x: 300,
+                    y: 200
+                },
+                image: 'test_vector'
+            });
+            box.add(node2);
+            var link = new twaver.Link(node1, node2);
+            box.add(link);
+
+
+
+            twaver.Util.registerImage('clip_false', {
+                w: 100,
+                h: 100,
+                clip: false, // optional, default is false
+                origin: { x: 0.5, y: 0.5 }, // optional, default is { x: 0.5, y: 0.5 }
+                v: [
+                    {
+                        shape: 'ellipse',
+                        cx: 0,
+                        cy: 0,
+                        rx: 60,
+                        ry: 40,
+                        fill: '#0089C1',
+                        gradient: {
+                            type: 'linear.west',
+                            color: '#61B6D8'
+                        }
+                    }
+                ]
+            });
+            twaver.Util.registerImage('clip_true', {
+                w: 100,
+                h: 100,
+                clip: true,
+                origin: { x: 0, y: 0 },
+                v: [
+                    {
+                        shape: 'ellipse',
+                        cx: 50,
+                        cy: 50,
+                        rx: 60,
+                        ry: 40,
+                        fill: '#0089C1',
+                        gradient: {
+                            type: 'linear.west',
+                            color: '#61B6D8'
+                        }
+                    }
+                ]
+            });
+            var clip_false = new twaver.Node();
+            clip_false.setName('clip: false,\norigin: { x: 0.5, y: 0.5 }');
+            clip_false.setImage('clip_false');
+            clip_false.setLocation(100, 80);
+            box.add(clip_false);
+            var clip_true = new twaver.Node();
+            clip_true.setName('clip: true,\norigin: { x: 0, y: 0 }');
+            clip_true.setImage('clip_true');
+            clip_true.setLocation(300, 80);
+            box.add(clip_true);
+        }
+
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

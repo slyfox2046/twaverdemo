@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        function init () {
+            var view = network.getView();
+            document.body.appendChild(view);
+            network.adjustBounds({ x: 0, y: 0, width: 1200, height: 700 });
+            network.setZoomManager(new twaver.vector.LogicalZoomManager(network, true));
+            var img = new Image();
+            img.src = './images/floor.png';
+            img.onload = function () {
+                img.onload = null;
+                twaver.Util.registerImage('pattern1', img, img.width, img.height);
+                network.invalidateElementUIs();
+                setupToolTip();
+            };
+            twaver.Util.registerImage('pattern2', {
+                w: 20,
+                h: 20,
+                fill: '#57AB9A',
+                v: [
+                    {
+                        shape: 'circle',
+                        r: 10
+                    }
+                ]
+            });
+            twaver.Util.registerImage('shape1', {
+                w: 100,
+                h: 100,
+                origin: {
+                    x: 0,
+                    y: 0
+                },
+                lineWidth: 1,
+                lineColor: '#EC6C00',
+                pattern: 'pattern1',
+                v: [
+                    {
+                        shape: 'circle',
+                        r: 50,
+                        cx: 50,
+                        cy: 50
+                    }
+                ]
+            });
+            twaver.Util.registerImage('shape2', {
+                w: 100,
+                h: 100,
+                lineWidth: 1,
+                lineColor: '#EC6C00',
+                pattern: 'pattern2',
+                v: [
+                    {
+                        shape: 'circle',
+                        r: 50
+                    }
+                ]
+            });
+            var shape1 = new twaver.Node();
+            shape1.setImage('shape1');
+            shape1.setLocation(200, 120);
+            shape1.setSize(100, 100);
+            box.add(shape1);
+            var shape2 = new twaver.Node();
+            shape2.setImage('shape2');
+            shape2.setLocation(400, 120);
+            shape2.setSize(100, 100);
+            box.add(shape2);
+            setupToolTip();
+        }
+        function setupToolTip () {
+            twaver.Defaults.TOOLTIP_DISMISS_DELAY = 60 * 1000;
+            box.forEach(function (element) {
+                var image = element.getImage();
+                if (typeof image === 'string') {
+                    image = twaver.Util.getImageAsset(image);
+                    image = image && image.getImage();
+                    if (image instanceof Image) {
+                        image = image.src;
+                    }
+                }
+                image = JSON.stringify(image, null, 2);
+                element.getImage() && element.setToolTip('<pre>' + image + '</' + 'pre>');
+            })
+        }
+
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

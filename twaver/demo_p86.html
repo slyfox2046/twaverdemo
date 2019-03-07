@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var tree = new twaver.controls.Tree(box);
+        function init() {
+            initTreeView();
+            initDataBox();
+        }
+        function initTreeView() {
+            var treeDom = tree.getView();
+            treeDom.style.width = "100%";
+            treeDom.style.height = "100%";
+            document.body.appendChild(treeDom);
+            tree.expandAll();
+
+            //tree的checkbox （设置引导线，线条样式与checkbox冲突）
+            tree.setCheckMode('descendantAncestor'); //参p87参数说明
+            // tree.setCheckMode('default'); //参p87参数说明
+
+            //设置引导线，线条样式与checkbox冲突
+            // tree.setLineType('solid');//线条类型
+            // tree.setLineColor('#000000');//线条颜色
+            // tree.setLineAlpha(1);//线条透明度
+            // tree.setLineThickness(1);//线条厚度
+            // tree.setLineDash([10,2]);//线条虚线样式，在linetype为‘dotted’情况下有效
+
+
+            //排序
+            tree.setSortFunction(function (d1, d2) {
+                return d1.getName() > d2.getName() ? 1 : -1;//正序
+                return d1.getName() > d2.getName() ? -1 : 1;//反序
+            });
+            //修改tree选中颜色
+            tree.getSelectColor = function() {
+                return "#FF0000";
+            }
+        }
+        function initDataBox() {
+            var group = new twaver.Group();
+            group.setName('Group');
+            group.setIcon('../images/toolbar/group_icon.png');
+            box.add(group);
+            for (var i = 0; i < 3; i++) {
+                var node1 = new twaver.Node({
+                    name: 'Node-' + Math.floor(Math.random() * 10),
+                    location: {
+                        x: 100,
+                        y: 200
+                    },
+                    icon: '../images/toolbar/node_icon.png'
+                });
+                node1.setParent(group);
+                box.add(node1);
+                for (var j = 0; j < 3; j++) {
+                    var node2 = new twaver.Node();
+                    node2.setName('Child-' + Math.floor(Math.random() * 10));
+                    node2.getAlarmState().setNewAlarmCount(twaver.AlarmSeverity.MAJOR, 1);
+                    node2.setParent(node1);
+                    box.add(node2);
+                }
+            }
+        }
+
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var network = new twaver.vector.Network(box);
+        var tree = new twaver.controls.Tree(box);
+        var toolbar = document.createElement('div');
+        var autoLayouter = new twaver.layout.AutoLayouter(box);
+        var bounds = null;
+        var overview = new twaver.vector.Overview(network);
+
+        function init() {
+            initToolbar();
+            var networkPane = new twaver.controls.BorderPane(network, toolbar);
+            networkPane.setTopHeight(25);
+            var leftPane = new twaver.controls.SplitPane(tree, overview, 'vertical', 0.7);
+// var split = new twaver.controls.SplitPane(tree, pane, null, 0.3);
+            var pane = new twaver.controls.SplitPane(leftPane, networkPane, 'horizontal', 0.3);
+            var view = pane.getView();
+            view.style.left = '0px';
+            view.style.top = '0px';
+            view.style.right = '0px';
+            view.style.bottom = '0px';
+            document.body.appendChild(view);
+            window.onresize = function () {
+                split.invalidate();
+            };
+            initBox();
+            tree.expandAll();
+        }
+
+        function initToolbar() {
+            var zoomToOverview = addCheckBox(toolbar, false, "Overview", function () {debugger
+                doLayout(zoomToOverview.value,autoLayouterType.value);
+            });
+            var autoLayouterType = document.createElement('select');
+            var items = ['round', 'symmetry', 'topbottom', 'bottomtop', 'leftright', 'rightleft', 'hierarchic'];
+            items.forEach(function (item) {
+                var option = document.createElement('option');
+                option.appendChild(document.createTextNode(item));
+                option.setAttribute('value', item);
+                autoLayouterType.appendChild(option);
+            });
+            autoLayouterType.addEventListener('change', function () { doLayout(zoomToOverview.value,autoLayouterType.value); }, false);
+            toolbar.appendChild(autoLayouterType);
+        }
+
+        function doLayout (overview,type) {
+            if (overview) {
+                autoLayouter.doLayout(type, function () {
+                    network.zoomOverview(false);
+                });
+            } else {
+                autoLayouter.doLayout(type);
+            }
+        }
+        function addCheckBox (div, checked, name, callback) {
+            var checkBox = document.createElement('input');
+            checkBox.id = name;
+            checkBox.type = 'checkbox';
+            checkBox.style.padding = '4px 4px 4px 4px';
+            checkBox.checked = checked;
+            if (callback) checkBox.addEventListener('click', callback, false);
+            div.appendChild(checkBox);
+            var label = document.createElement('label');
+            label.htmlFor = name;
+            label.innerHTML = name;
+            div.appendChild(label);
+            return checkBox;
+        }
+
+        function initBox () {
+            for (var i = 0, n = 1; i < n; i++) {
+                var group = new twaver.Node({name: '' + box.size()});
+                box.add(group);
+                for (var j = 0, c = 10; j < c; j++) {
+                    var node = new twaver.Node({name: '' + box.size()});
+                    group.addChild(node);
+                    box.add(node);
+                    var link = new twaver.Link({name: '' + box.size()}, group, node);
+                    group.addChild(link);
+                    box.add(link);
+                    for(var k=0;k<15;k++){
+                        var child1 = new twaver.Node();
+                        box.add(child1);
+                        var link1 = new twaver.Link(node,child1);
+                        box.add(link1);
+                        for(var m=0;m<2;m++){
+                            var child2 = new twaver.Node();
+                            box.add(child2);
+                            var link2 = new twaver.Link(child2,child1);
+                            box.add(link2);
+                        }}
+                }
+            }
+            autoLayouter.doLayout('symmetry');
+        }
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

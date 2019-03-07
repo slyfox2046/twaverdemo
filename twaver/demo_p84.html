@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        var box = new twaver.ElementBox();
+        var tree = new twaver.controls.Tree(box);
+        function init() {
+            initTreeView();
+            initDataBox();
+            registerImage();
+        }
+        function initTreeView() {
+            var treeDom = tree.getView();
+            treeDom.style.width = "100%";
+            treeDom.style.height = "100%";
+            document.body.appendChild(treeDom);
+            tree.expandAll();
+        }
+        function initDataBox() {
+            var parent = new twaver.Group();
+            parent.setName('group');
+            box.add(parent);
+            var from = new twaver.Node({
+                name: 'from',
+                location: {
+                    x: 100,
+                    y: 100
+                }
+            });
+            from.getAlarmState().increaseNewAlarm(twaver.AlarmSeverity.CRITICAL);
+            box.add(from);
+            var to = new twaver.Node({
+                name: 'to',
+                location: {
+                    x: 220,
+                    y: 160
+                }
+            });
+            to.getAlarmState().increaseNewAlarm(twaver.AlarmSeverity.WARNING);
+            box.add(to);
+            var link = new twaver.Link(from, to);
+            link.setName('link');
+            box.add(link);
+            parent.addChild(from);
+            parent.addChild(to);
+            parent.addChild(link);
+        }
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

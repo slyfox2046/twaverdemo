@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        function init(){
+            var box = new twaver.ElementBox();
+            var network = new twaver.vector.Network(box);
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x:0, y:0, width:800, height:700});
+
+            twaver.Util.registerImage('gradient1', {
+                w: 100,
+                h: 100,
+                lineWidth: 1,
+                v: [
+                    {
+                        shape: 'rect',
+                        rect: [ -50, -50, 100, 100],
+                        lineColor: '#EC6C00',
+                        fill: '#0089C1',
+                        gradient: 'linear.west',
+                        gradientColor: '#61B6D8'
+                    }
+                ]
+            });
+            twaver.Util.registerImage('gradient2', {
+                w: 100,
+                h: 100,
+                lineWidth: 1,
+                v: [
+                    {
+                        shape: 'rect',
+                        rect: { x: -50, y: -50, w: 100, h: 100 },
+                        lineColor: '#EC6C00',
+                        gradient: {
+                            type: 'linear.west',
+                            color: '#61B6D8'
+                        },
+                        fill: '#0089C1'
+                    }
+                ]
+            });
+            twaver.Util.registerImage('gradient3', {
+                w: 100,
+                h: 100,
+                lineWidth: 1,
+                v: [
+                    {
+                        shape: 'rect',
+                        rect: { x: -50, y: -50, w: 100, h: 100 },
+                        lineColor: '#EC6C00',
+                        gradient: {
+                            type: 'linear',
+                            x1: -50,
+                            y1: 0,
+                            x2: 50,
+                            y2: 0,
+                            stop: [
+                                {
+                                    offset: 1,
+                                    color: '#0089C1'
+                                },
+                                {
+                                    offset: 0,
+                                    color: '#61B6D8'
+                                }
+                            ]
+                        }
+                    }
+                ]
+            });
+            var gradient1 = new twaver.Node();
+            gradient1.setImage('gradient1');
+            gradient1.setLocation(200, 80);
+            box.add(gradient1);
+            var gradient2 = new twaver.Node();
+            gradient2.setImage('gradient2');
+            gradient2.setLocation(400, 80);
+            box.add(gradient2);
+            var gradient3 = new twaver.Node();
+            gradient3.setImage('gradient3');
+            gradient3.setLocation(600, 80);
+            box.add(gradient3)
+        }
+
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>

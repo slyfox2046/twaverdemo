@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jq/jquery-1.8.2.js"></script>
+    <script src="../common/twaver/twaver.js"></script>
+    <script src="../common/twaver/license.js"></script>
+    <script type="text/javascript">
+        function init(){
+            var box = new twaver.ElementBox();
+            var network = new twaver.vector.Network(box);
+            document.body.appendChild(network.getView());
+            network.adjustBounds({x:0, y:0, width:800, height:700});
+
+            twaver.Util.registerImage('shape1', {
+                w: 100,
+                h: 100,
+                line: {
+                    width: 1,
+                    color: '#EC6C00',
+                    dash: [ 10, 10 ],
+                    dashOffset: 10
+                },
+                fill: '#61B6D8',
+                v: [
+                    {
+                        shape: 'rect',
+                        rect: [ -50, -50, 100, 100]
+                    }
+                ]
+            });
+            twaver.Util.registerImage('shape2', {
+                w: 100,
+                h: 100,
+                lineWidth: 1,
+                lineColor: '#EC6C00',
+                lineDash: [ 10, 10 ],
+                v: [
+                    {
+                        shape: 'rect',
+                        rect: [ -50, -50, 100, 100]
+                    }
+                ]
+            });
+            var shape1 = new twaver.Node();
+            shape1.setName('shape1');
+            shape1.setImage('shape1');
+            shape1.setLocation(100, 80);
+            box.add(shape1);
+            var shape2 = new twaver.Node();
+            shape2.setName('shape2');
+            shape2.setImage('shape2');
+            shape2.setLocation(300, 80);
+            box.add(shape2);
+        }
+
+
+    </script>
+
+</head>
+<body onload="init()" >
+<div id="main"></div>
+
+</body>
+
+</html>
