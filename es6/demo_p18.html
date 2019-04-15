@@ -6,22 +6,22 @@
     <script src="../common/jquery/jquery.js"></script>
 </head>
 <script type="text/javascript">
-    $(function() {
-        var a= [];
+    $(function () {
+        var a = [];
         for (let i = 0; i < 10; i++) {
             a [i] = function () {
                 console.log(i);
             }
         }
         a[6]();
-    //
-    //     var tmp = 123;
-    //
-    //     if (true) {
-    //         tmp = 'abc'; // ReferenceError
-    //         let tmp;
-    //         console.log(tmp);
-    //     }
+        //
+        //     var tmp = 123;
+        //
+        //     if (true) {
+        //         tmp = 'abc'; // ReferenceError
+        //         let tmp;
+        //         console.log(tmp);
+        //     }
 
 
     })
@@ -29,8 +29,41 @@
 
 </script>
 
-<body>
+<style>
+    .mailicon {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        /*line-height: 200px;*/
+        background: url(../images/pngtest.png) no-repeat;
+    }
+
+    .see {
+        background-position: -22px 0px
+    }
+
+    .unsee {
+        background-position: -310px 0px
+    }
+
+    .bg{
+        background-color: #34ff74;
+    }
+
+    .bg:hover{
+        background-color: #ffc23e;
+        cursor: pointer;
+    }
+
+
+</style>
+
+<body style="background-color: #eeeeee;">
 <div>
+    <div class="mailicon see bg"></div>&nbsp已看
+
+    <div class="mailicon unsee bg"></div>&nbsp未看
+
 
 </div>
 </body>

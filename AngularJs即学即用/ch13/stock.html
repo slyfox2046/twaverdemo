@@ -1,0 +1,8 @@
+<div class="stock-dash">
+    <span ng-transclude></span>
+    Name:
+    <span class="stock-name"
+          ng-bind="stockData.name"></span>
+    Price:
+    <span ng-bind="getChange(stockData)+'%'"></span>
+</div>
