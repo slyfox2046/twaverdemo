@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    window.onload = function () {
+        setCss = function (_this,cssOption) {
+            if(!_this|| _this.nodeType===3 || _this.nodeType ===8 || !_this.style){
+                return ;
+            }
+            for (var cs in cssOption){
+                _this.style[cs] = cssOption[cs];
+            }
+            return _this;
+        }
+
+        function getTypeElement(es,type) {
+            var esLen = es.length,i=0,eArr=[],esl=null;
+
+            for(;i<esLen;i++){
+                esl=es[i];
+                if(esl.nodeName.replace('#',"").toLocaleLowerCase() == type){
+                    eArr.push(esl);
+                }
+            }
+            return eArr;
+
+        }
+
+        function horizontalShuffling(options) {
+            var e = options.e;
+            var child = getTypeElement(e.childNodes,'li'),
+                childLen = child.length,
+                w = 300,
+                _w= childLen *w;
+
+            this.setCss(e,{"width":_w});
+            var move = function (type,callback) {
+                var v= 0,
+                    _left = parseInt((e.style.left || e.offsetLeft),10);
+
+                if(type =="l"){
+                    v= w;
+                    if (_left<=-(_w-w)){
+                        return ;
+                    }
+                }else {
+                    v=-w;
+                    if (_left>= 0){
+                        return ;
+                    }
+                }
+
+                var __left = Math.ceil((_left-v)/300)*300;
+
+                if(__left>0){
+                    __left=0;
+
+                }
+                new animateManage({
+                    "context":e,
+                    "effect" :'linear',
+                    "time":200,
+                    "starCss":{
+                        "left":_left
+                    },
+                    "css":{
+                        "left":__left
+                    },
+                    "callback":function () {
+                        callback && callback();
+
+                    }
+                }).init();
+            }
+
+            var direction ="l",
+                horizontallD =-1,
+                closeHorizontal = function () {
+                    horizontallD !=-1 && clearInterval(horizontallD);
+                },
+                openHorizontal = function () {
+                    horizontallD= setInterval(function () {
+                        var _left = parseInt((e.style.left || e.offsetLeft ),10);
+                        if (_left == -(_w-w)){
+                            direction = 'r';
+                        }
+                        if(_left==0){
+                            direction="l";
+                        }
+                        move(direction);
+                    },2000)
+                };
+            openHorizontal();
+            options.left.onclick = function () {
+                move('l');
+            }
+            options.left.onmouseover = function () {
+                closeHorizontal();
+            }
+            options.left.onmouseout = function () {
+                openHorizontal();
+            }
+
+            options.right.onclick = function () {
+                move('r');
+            }
+            options.right.onmouseover = function () {
+                closeHorizontal();
+            }
+            options.right.onmouseout = function () {
+                openHorizontal();
+            }
+        }
+
+        horizontalShuffling({
+            "e":document.getElementById("horizontalShuffling"),
+            "left":document.getElementById("horizontalShufflingBtnLeft"),
+            "right":document.getElementById("horizontalShufflingBtnRight"),
+        })
+    }
+</script>
+<body>
+<h2>图片轮播横向轮播效果</h2>
+<div class="horizontalShuffling">
+    <ul id="horizontalShuffling">
+        <li><img src="../images/1.jpg"  alt=""></li>
+        <li><img src="../images/2.jpg"  alt=""></li>
+        <li><img src="../images/3.jpg"  alt=""></li>
+        <li><img src="../images/4.jpg"  alt=""></li>
+        <li><img src="../images/5.jpg"  alt=""></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div id="horizontalShufflingBtn">
+    <input id="horizontalShufflingBtnLeft" type="button" value="左滚动">
+    <input id="horizontalShufflingBtnRight" type="button" value="右滚动">
+</div>
+
+<style>
+    .horizontalShuffling{
+        position: absolute;
+        z-index: 111111111111111111;
+        top:45px;
+        height: 333px;
+        overflow: hidden;
+        width:300px ;
+        margin:0px auto 0px;
+    }
+    #horizontalShuffling{
+        position: relative;;
+        width:1000px;
+        height: auto;
+        padding:0;
+    }
+    #horizontalShuffling li{
+        float: left ;
+        z-index: 0;
+        position: relative;
+        height: auto;
+        width: 300px   ;
+        cursor :pointer;
+        list-style-type: none;
+        border-radius: 4px;
+        -webkit-box-shadow: 1px 1px 12px rgba(200,200,200,1);
+        -moz-box-shadow: 1px 1px 12px rgba(200,200,200,1);
+        box-shadow: 1px 1px 12px rgba(200,200,200,1);
+        margin: 0;
+    }
+    #horizontalShuffling li img{
+        width: 300px;
+        height:333px;
+    }
+    #horizontalShufflingBtn{
+        position: relative;
+        top:350px;
+    }
+</style>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="../common/jquery1.9/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../common/zQuery.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var pics = document.getElementById('pics');
+        // var pics_pre = getByClass(pics,'pics_pre')[0];
+        // var pics_next = getByClass(pics,'pics_next')[0];
+        // var pics_list =getByClass(pics,'pics_list')[0];
+
+        var pics_pre = pics.getElementsByClassName('pics_pre')[0];
+        var pics_next = pics.getElementsByClassName('pics_next')[0];
+        var pics_list =pics.getElementsByClassName('pics_list')[0];
+
+
+        var pics_ul = pics.getElementsByTagName('ul')[0];
+        var pics_lis = pics_ul.getElementsByTagName('li');
+        var inow =0;
+
+        for (var i=0;i<pics_lis.length;i++){
+            var list= document.createElement('li');
+            pics_list.appendChild(list);
+        }
+        var list_li = pics_list.getElementsByTagName('li');
+        for (var i=0;i<list_li.length;i++){
+            list_li[i].onclick = function () {
+                inow=index(this,list_li);
+                console.log(inow);
+                show(inow);
+            }
+        }
+        show(0);
+        var timer = setInterval(function () {
+            if(inow<pics_lis.length-1){
+                inow++;
+            }else{
+                inow=0;
+            }
+            show(inow);
+        },3000);
+
+        pics_pre.onclick = function () {
+            if(inow>0){
+                inow -=1;
+            }else{
+                inow = pics_lis.length-1;
+            }
+            show(inow);
+        }
+
+        pics_next.onclick = function () {
+            if(inow<pics_lis.length-1){
+                inow+=1;
+            }else{
+                inow=0;
+            }
+            show(inow);
+        }
+
+        function show(inow){
+            var l = pics_lis[inow].offsetLeft;
+            move(pics_ul,{left:-l});
+
+            for (var i =0;i<pics_list.length;i++){
+                list_li[i].style.background = '#ffffff';
+            }
+            list_li[inow].style.background = '#ee7600';
+
+        }
+
+        pics.onmouseover = function () {
+            pics_pre.style.display = 'block';
+            pics_next.style.display = 'block';
+            pics_list.style.display = 'block';
+            clearInterval(timer);
+        }
+
+        pics.onmouseout = function () {
+            pics_pre.style.display ='none';
+            pics_next.style.display = 'none';
+            pics_list.style.display = "none";
+            timer = setInterval(function () {
+                if(inow<pics_lis.length){
+                    show(inow);
+                    inow++;
+                }else{
+                    inow =0;
+                }
+            },3000);
+        }
+    }
+
+</script>
+<body>
+<h2>图片轮播横向轮播效果(超级实用代码)</h2>
+<div id="pics">
+    <ul class="pics">
+        <li><a href=""><img src="../images/1.jpg"  alt=""></a></li>
+        <li><a href=""><img src="../images/2.jpg"  alt=""></a></li>
+        <li><a href=""><img src="../images/3.jpg"  alt=""></a></li>
+        <li><a href=""><img src="../images/4.jpg"  alt=""></a></li>
+        <li><a href=""><img src="../images/5.jpg"  alt=""></a></li>
+    </ul>
+    <span class="pics_pre"></span>
+    <span class="pics_next"></span>
+    <ul class="pics_list"></ul>
+</div>
+
+<style>
+    *{
+        margin: 0;
+        padding:0;
+
+    }
+    #pics{
+        width:520px;
+        height: 280px;
+        border:1px solid;
+        overflow: hidden;
+        position: absolute;
+        top: 100px  ;
+        left:300px;
+    }
+    .pics{
+        width: 2600px;
+        height: 280px;
+        position: relative;
+        left: 0;
+    }
+    img{
+        width:520px;
+        height:300px;
+    }
+    .pics>li{
+        float: left;
+    }
+    .pics_pre{
+        width: 32px ;
+        height: 32px    ;
+        position: absolute;
+        top:45%;
+        left:0px;
+        background: url("../images/left.png");
+        /*background: url("images/left.png");*/
+        cursor: pointer;
+        background-size: 32px 32px;
+        display: none;
+    }
+    .pics_next{
+        width: 32px ;
+        height: 32px    ;
+        position: absolute;
+        top:45%;
+        right:0px;
+        background: url("../images/right.png");
+        background-size: 32px 32px;
+        /*background: url("../images/twaver.png");*/
+        cursor: pointer;
+        display: none;
+    }
+
+    .pics_list{
+        width:100%;
+        height: 8%;
+        position: absolute;
+        bottom:0;
+        background: #8B8878;
+        opacity: 0.8;
+        filter:alpha(opacity:80);
+        cursor:pointer;
+        text-align: center;
+        display: none;
+    }
+    .pics_list>li{
+        width:10px;
+        height: 10px    ;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background: #ffffff;
+        cursor: pointer;
+        float: left;
+        margin: 5px;
+        left: 35%;
+        position: relative;
+        list-style: none;
+    }
+
+</style>
+</body>
+
+</html>

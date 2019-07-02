@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js" type="text/javascript"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="external nofollow" rel="external nofollow" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<body >
+<div ng-app="myApp" ng-controller="myCtrl">
+    <input type = 'test' ng-change="changeKeyValue(searchField)" ng-model="searchField" style = 'display:block;width:200px' ng-click = 'hidden=!hidden' value="{{searchField}}"/></input>
+    <div ng-hide="hidden">
+        <select style = 'width:200px' ng-change="change(x)" ng-model="x" multiple>
+            <option ng-repeat="data in datas" >{{data}}</option>
+        </select>
+    </div>
+</div>
+<div>
+    <p><h1>angular输入选择框</h1></p>
+    <p><h2>逻辑实现步骤</h2></p>
+    <p>1文本框做输入，并监控器change事件，在change事件中获取输入值，获取的输入值与选择框中的各个下拉项进行比较</p>
+    <p>2如果包含则只显示包含的部分，不包含则显示全部</p>
+
+</div>
+
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.datas = ["key4","xyz","key3","xxxx","key2","value2","key1","value1"]; //下拉框选项
+        $scope.tempdatas = $scope.datas; //下拉框选项副本
+        $scope.hidden=true;//选择框是否隐藏
+        $scope.searchField='';//文本框数据
+        //将下拉选的数据值赋值给文本框
+        $scope.change=function(x){
+            $scope.searchField=x;
+            $scope.hidden=true;
+        }
+        //获取的数据值与下拉选逐个比较，如果包含则放在临时变量副本，并用临时变量副本替换下拉选原先的数值，如果数据为空或找不到，就用初始下拉选项副本替换
+        $scope.changeKeyValue=function(v){
+            var newDate=[]; //临时下拉选副本
+            //如果包含就添加
+            angular.forEach($scope.datas ,function(data,index,array){
+                if(data.indexOf(v)>=0){
+                    newDate.unshift(data);
+                }
+            });
+            //用下拉选副本替换原来的数据
+            $scope.datas=newDate;
+            //下拉选展示
+            $scope.hidden=false;
+            //如果不包含或者输入的是空字符串则用初始变量副本做替换
+            if($scope.datas.length==0 || ''==v){
+                $scope.datas=$scope.tempdatas;
+            }
+            console.log($scope.datas);
+        }
+    });
+</script>
+</html>

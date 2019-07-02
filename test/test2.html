@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../common/jquery1.9/jquery-1.9.1.min.js"></script>
+</head>
+<body >
+<div ng-controller="ctrl" ng-app="myapp">
+    <p>{{greeting.text}},Angular</p>
+    <!-- <span style="position:absolute;border:1pt solid #c1c1c1;overflow:hidden;width:188px;
+    height:19px;clip:rect(-1px 190px 190px 170px);">    -->
+    <select name="demoSelect" id="demoSelect" style="width:190px;height:20px;margin:-2px;" ng-model="selectone" ng-change="fu()">
+        <option value="c++">c++</option>
+        <option value="Java">Java</option>
+        <option value="Html">Html</option>
+        <option value="Js">Js</option>
+    </select>
+    </span>
+    <input type="text" name="inputSelect" ng-model="in" id="inputSelect" value="please choose get CM or input" style="position:relative;margin-left:-190px;width:170px;height:15px;border:0pt;">
+    <br>
+    <br>
+    <div >
+    <input list = "cars" ng-model="query" ng-model-options="{debounce:200}"  />
+    <datalist id="cars" class="datalist ">
+        <option value="{{item}}" ng-repeat="item in dataList"></option>
+    </datalist>
+    </div>
+
+    <div>
+
+        <input list="cars1"  id="input" onchange="inputSelect()"/>
+        <datalist id="cars1">
+            <option value="111" data-value="111"  data-id="1">
+            <option value="122"  data-value="122" data-id="2">
+            <option value="1222" data-value="1222" data-id="4">
+        </datalist>
+    </div>
+<button ng-click="ttt()"> ttt</button>
+</div>
+
+
+</body>
+<style>
+    .datalist {
+        /*height:50px !important;*/
+        max-height:80px !important;
+        overflow-y:auto;
+        /*display:block !important;*/
+    }
+    input::-webkit-calendar-picker-indicator{
+        display: none;
+        -webkit-appearance: none;
+    }
+</style>
+<script type="text/javascript" src="../common/angular-1.4.8/angular.min.js"></script>
+<script>
+
+    function inputSelect(){
+        var input_select=$("#input").val();
+        var option_length=$("option").length;
+        var option_id='';
+        for(var i=0;i<option_length;i++){
+            var option_value=$("option").eq(i).attr('data-value');
+            if(input_select==option_value){
+                option_id=$("option").eq(i).attr('data-id');
+                break;
+            }
+        }
+        console.log(input_select,option_length,option_id);
+    };
+    angular.module('myapp',[]).controller('ctrl',function ($scope,$http) {
+        $scope.greeting = {
+            text: 'Hello'
+        };
+        $scope.fu = function () {
+            console.log($scope.selectone);
+            document.getElementById("inputSelect").value = $scope.selectone;
+            console.log(document.getElementById("inputSelect").value);
+        }
+        $scope.selectone = "c++";
+
+        $scope.in =""
+        $scope.$watch('in',function (n,o) {
+            console.log(n);
+
+        })
+
+        /**************************xxxxxx*******************************/
+        $scope.$watch('query',function (n,o) {
+            $scope.getData($scope.query);
+        })
+
+        $scope.getData = function (p) {
+            var url ="http://127.0.0.1:3000/mytest?query="+p;
+            // var url = "http://172.16.112.26:8084/otms/dispatch/item/selectItemGroupByType?type=0";
+            $http.get(url).then(function (data) {
+                $scope.dataList = data.data;
+
+            })
+        }
+
+        // $scope.getData();
+
+        $scope.ttt = function () {
+            alert($scope.query);
+
+        }
+
+
+    })
+
+
+</script>
+</html>
