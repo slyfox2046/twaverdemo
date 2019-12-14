@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "text1": "Option 1"
+    },
+    {
+      "id": 2,
+      "text1": "Option 2",
+      "selected": true
+    },
+    {
+      "id": 3,
+      "text1": "Option 3",
+      "disabled": true
+    },
+    {
+      "id": 4,
+      "text1": "Option 4"
+    },
+    {
+      "id": 5,
+      "text1": "Json 3"
+    }
+  ]
+}

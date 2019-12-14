@@ -1,0 +1,44 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-09-04 11:03:57
+ * @LastEditTime: 2019-11-12 14:00:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \twaverdemo\test\菜单显示.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .menu{
+        display:none
+    }
+    .user:hover + .menu{
+        display:list-item;
+    }
+    .menu:hover{
+        display:list-item;
+    }
+    ul.menu:before{
+        content:"";
+        position:absolute;
+        left:0;
+        top:-20px;
+        width:100%;
+        height: 20px;
+        background-color: #0ba9ce;
+    }
+</style>
+<body>
+<li class="user">用户</li>
+<ul class="menu">
+    <ul>
+        <li>账户</li>
+        <li>登出</li>
+    </ul>
+</ul>
+</body>
+</html>

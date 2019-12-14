@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="wrap">
+    <div class="left">left</div>
+    <div class="main">main</div>
+    <div class="right">right</div>
+</div>
+<style>
+    .left{
+        background: red;
+        width: 100px;
+        margin-left: -100px;
+    }
+    .right{
+        background: green;
+        width:200px;
+        margin-right: -200px;
+    }
+    .main{
+        background: blue;
+        width: 100%;
+    }
+    .left,.right,.main{
+        display: inline-block;
+        vertical-align: top;
+        font-size: 12px;
+    }
+    .wrap{
+        font-size: 0;
+        padding-left: 100px;
+        padding-right: 200px;
+    }
+
+</style>
 </body>
 </html>

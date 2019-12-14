@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <!--css-->
+    <link rel="stylesheet" href="../../common/oss_pc/oss/css/oss.min_new.css" />
+    <link rel="stylesheet" href="../../common/oss_pc/oss/iconfont/iconfont.css" />
+
+    <!--ui-grid-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/widget/ui_grid/ui-grid.css" charset="UTF-8"/>-->
+
+    <!-- ui-grid -->
+    <link href="../../common/ui_grid/css/ui-grid.css" rel="stylesheet" />
+    <!--<link href="../common/ui_grid/osspage/skin/osspage.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href="main.css" type="text/css">-->
+
+    <script src="../../common/angular-1.4.8/angular.js"></script>
+    <script src="../../common/angular-1.4.8/angular-touch.js"></script>
+    <script src="../../common/angular-1.4.8/angular-animate.js"></script>
+    <script src="../../common/angular-1.4.8/angular-aria.js"></script>
+
 </head>
-<body>
-$END$
+<body >
+<my-photos>
+    <my-photo title="Flower">
+        <img src="../../images/1.jpg" alt="" height="300px" width="400px">
+    </my-photo>
+    <my-photo title="Arch">
+        <img src="../../images/2.jpg" alt="" height="300px" width="400px">
+    </my-photo>
+    <my-photo title="Lake">
+        <img src="../../images/3.jpg" alt="" height="300px" width="400px">
+    </my-photo>
+</my-photos>
+
 </body>
+<script>
+    angular.module('myApp',[])
+        .directive('myPhotos',function(){
+            return{
+                restrict :'E',
+                transclude : true,
+                scope :{},
+                controller : function ($scope) {
+                    var photos = $scope.photos =[];
+                    $scope.select = function (photo) {
+                        angular.forEach(photos,function (photo) {
+                            photo.selected = false;
+                        });
+                        photo.selected = true;
+                    };
+                    // console.log(this);
+                    this.addPhoto = function (photo) {
+                        photos.push(photo);
+                    };
+                },
+                templateUrl : 'my_photos.html'
+            }
+        })
+        .directive('myPhoto',function () {
+            return {
+                require : '^myPhotos',
+                restrict : "E",
+                transclude : true,
+                scope: {title: '@'},
+                link: function (scope,elem,attrs,photosControl) {
+                    console.log(scope);
+                    photosControl.addPhoto(scope);
+                },
+                template:'<div ng-show="selected" ng-transclude></div>'
+            };
+        })
+
+</script>
 </html>

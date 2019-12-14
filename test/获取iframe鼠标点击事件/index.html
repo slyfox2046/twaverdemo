@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
+<aside id="sidebar">
+    <%--这是需要隐藏的侧边栏--%>
+</aside>
+<button><%--点击按钮显示侧边栏--%></button>
+<iframe id="my-iframe">
+    <%--获取此区域的点击事件--%>
+</iframe>
+
 
 </body>
+<script>
+    window.onload = function () {
+        // console.log("adbcde");
+        document.getElementById('my-iframe').contentDocument.onclick = function () {
+            alert("Hello");
+        }
+    }
+</script>
 </html>

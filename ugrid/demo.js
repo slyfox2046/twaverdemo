@@ -17,20 +17,18 @@ app.controller('MainCtrl', ['$scope', '$http', '$log', '$timeout', 'uiGridConsta
         enableSelectAll : false, // 选择所有checkbox是否可用，默认为true;
         enableRowSelection : false, // 行选择是否可用，默认为true;
 
-
-
     };
 
     $scope.gridOptions.columnDefs = [
         //width 宽度，可以百分比
         //allowCellFocus 是否允许焦点
 
-        {name: 'id', width: "5%"},
-        {name: 'name', width: "20%"},
-        {name: 'age', width: "20%", displayName: 'Age (not focusable)', allowCellFocus: false},
+        {name: 'id', width: "300"},
+        {name: 'name', width: "300",displayName:'基准值 <br>衰减'},
+        {name: 'age', width: "300", displayName: 'Age (not focusable)', allowCellFocus: false},
 
-        {name: 'operate', width: "20%",cellTemplate:'<button class="btn primary" ng-click="grid.appScope.showMe()">Click Me</button>' },
-        {name: 'address.city', width: "20%",allowCellFocus: false,cellTemplate:'<div' +
+        {name: 'operate', width: "300",cellTemplate:'<button class="btn primary" ng-click="grid.appScope.showMe()">Click Me</button>' },
+        {name: 'address.city', width: "300",allowCellFocus: false,cellTemplate:'<div' +
                 ' style="height:25px;background-color:' +
                 ' red;color:yellow;text-align: center">hell</div>' }
     ];
@@ -103,6 +101,13 @@ app.controller('MainCtrl', ['$scope', '$http', '$log', '$timeout', 'uiGridConsta
             $log.log(msg);
         });
     };
+
+    $scope.ttt = function () {
+        var newHeight = Math.floor(Math.random() * (300 - 100 + 1) + 300);
+        angular.element(document.getElementsByClassName('grid')[0]).css('height', newHeight + 'px');
+
+    }
+
 }]);
 
 app.controller('SecondCtrl', ['$scope', '$http', '$interval', 'uiGridConstants', function ($scope, $http, $interval, uiGridConstants) {
@@ -139,4 +144,5 @@ app.controller('SecondCtrl', ['$scope', '$http', '$interval', 'uiGridConstants',
                 $scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);
             }, 0, 1);
         });
+
 }]);

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--css-->
+    <link rel="stylesheet" href="../common/oss_pc/oss/css/oss.min_new.css" />
+<!--    <link rel="stylesheet" href="../common/oss_pc/oss/iconfont/iconfont.css" />-->
+
+    <!--ui-grid-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/widget/ui_grid/ui-grid.css" charset="UTF-8"/>-->
+
+    <!-- ui-grid -->
+    <link href="../common/ui_grid/css/ui-grid.css" rel="stylesheet" />
+    <!--<link href="../common/ui_grid/osspage/skin/osspage.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">-->
+    <link rel="stylesheet" href="main.css" type="text/css">
+
+    <script src="../common/angular-1.4.8/angular.js"></script>
+    <script src="../common/angular-1.4.8/angular-touch.js"></script>
+    <script src="../common/angular-1.4.8/angular-animate.js"></script>
+    <script src="../common/angular-1.4.8/angular-aria.js"></script>
+
+    <script src="../common/ui_grid/js/ui-grid.min.js"></script>
+
+</head>
+<body>
+<body>
+<div ng-controller="MainCtrl as vm  ">
+    Try clicking the Add button to add the company column.
+    Try clicking the Remove button to remove the last column.
+    Try clicking the Splice button to insert a column in the middle.
+    <br>
+    <br>
+    <button id="button_add" class="btn btn-default" ng-click="vm.add()">Add</button>
+    <button id="button_remove" class="btn btn-default" ng-click="vm.remove()">Remove Last</button>
+    <button id="button_splice" class="btn btn-default" ng-click="vm.splice()">Splice</button>
+    <button id="button_unsplice" class="btn btn-default" ng-click="vm.unsplice()">Remove Middle</button>
+    <button id="button_toggle_visible" class="btn btn-default" ng-click="vm.toggleVisible()">Toggle Visible</button>
+    <button id="button_toggle_display_name" class="btn btn-default" ng-click="vm.toggleDisplayName()">Toggle Display Name</button>
+    <div id="grid1" ui-grid="vm.gridOptions" class="grid"></div>
+</div>
+</body>
+</body>
+<script src="demo113.js"></script>
+
+<style>
+    .grid {
+        width: 1500px;
+        height: 400px;
+    }
+
+</style>
+</html>

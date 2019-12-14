@@ -1,0 +1,41 @@
+{
+  "name": "twaverdemo",
+  "version": "1.0.0",
+  "description": "参考Demo：E:\\java学习资料\\twaver\\twavergis-html5-5.6.8",
+  "main": "gulpfile.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "angular-markdown-editor": "^1.1.5",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "file-saver": "^2.0.2",
+    "gulp": "^4.0.2",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.6",
+    "npmuptest": "^1.1.4"
+  },
+  "devDependencies": {
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.7.1",
+    "express-session": "^1.16.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slyfox2046/twaverdemo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slyfox2046/twaverdemo/issues"
+  },
+  "homepage": "https://github.com/slyfox2046/twaverdemo#readme"
+}

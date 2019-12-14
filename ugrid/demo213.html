@@ -25,34 +25,21 @@
 
   </head>
   <body>
+  <div ng-controller="MainCtrl">
+    <button type="button" class="btn btn-success" ng-click="randomSize()">Change to Random Size</button>
+    <br>
+    <br>
+    <div ui-grid="gridOptions" class="grid" ui-grid-auto-resize></div>
+  </div>
 
-<div ng-controller="MainCtrl">
-  <div style="height: 40px;"></div>
-  <!--<button type="button" class="btn btn-success" ng-click="toggleMultiSelect()">Toggle multiSelect</button>  <strong>MultiSelect:</strong> <span ng-bind="gridApi.grid.options.multiSelect"></span>-->
-  <!--<button type="button" class="btn btn-success" ng-click="toggleRow1()">Toggle Row 0</button>-->
-  <!--<br/>-->
-  <!--<br/>-->
-  <!--<button type="button" class="btn btn-success" ng-click="toggleModifierKeysToMultiSelect()">Toggle modifierKeysToMultiSelect</button>  <strong>ModifierKeysToMultiSelect:</strong> <span ng-bind="gridApi.grid.options.modifierKeysToMultiSelect"> </span>-->
-  <!--<br/>-->
-  <!--<br/>-->
-  <!--<button type="button" class="btn btn-success" ng-disabled="!gridApi.grid.options.multiSelect" ng-click="selectAll()">Select All</button>-->
-  <!--<button type="button" class="btn btn-success" ng-click="clearAll()">Clear All</button>-->
-  <!--<button type="button" class="btn btn-success" ng-click="setSelectable()">Set Selectable</button>-->
-  <!--<button type="button" class="btn btn-success" ng-click="toggleFullRowSelection()">Toggle full row selection</button>-->
-  <!--<br/>-->
-
-  <button type="button" class="btn btn-success" ng-click="ttt()">ttt</button>
-
-  <div id="grid1Selection" ui-grid="gridOptions" ui-grid-selection ui-grid-cellnav ui-grid-auto-resize class="grid"></div>
-</div>
-<!--<div ng-controller="SecondCtrl">-->
-  <!--Single selection grid without rowHeader, and allowing rowSelection to be toggled on and off dynamically:-->
-  <!--<br/>-->
-  <!--<button type="button" class="btn btn-success" ng-click="toggleRowSelection()">Toggle rowSelection</button>  <strong>rowSelection:</strong> <span ng-bind="gridApi.grid.options.enableRowSelection"></span>-->
-  <!--<div ui-grid="gridOptions" ui-grid-selection class="grid"></div>-->
-<!--</div>-->
-
-
-    <script src="demo.js"></script>
   </body>
+<script src="demo213.js"></script>
+
+<style>
+  .grid {
+    width: 500px;
+    height: 400px;
+  }
+
+</style>
 </html>

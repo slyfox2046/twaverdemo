@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<my-photos>
+    <my-photo title="p1">        <img src="../../images/1.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+    <my-photo title="p2">        <img src="../../images/2.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+    <my-photo title="p3">        <img src="../../images/3.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+    <my-photo title="p4">        <img src="../../images/4.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+    <my-photo title="p5">        <img src="../../images/5.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+    <my-photo title="p6">        <img src="../../images/6.jpg" alt="" style="width:400px;height: 300px;">    </my-photo>
+</my-photos>
+
+<my-test><button>你好</button></my-test>
+
+<script type="text/javascript" src="../../common/angular-1.4.8/angular.min.js"></script>
+<script src="directive_custom.js"></script>
 </body>
 </html>

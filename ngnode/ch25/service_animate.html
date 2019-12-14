@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <!--css-->
+    <link rel="stylesheet" href="../../common/oss_pc/oss/css/oss.min_new.css" />
+    <link rel="stylesheet" href="../../common/oss_pc/oss/iconfont/iconfont.css" />
+
+    <style>
+        .shrink-add, .shrink-remove{
+            transition: all ease 2.5s;
+        }
+        .shrink,.shrink-add.shrink-add-active{
+            height:100px;
+        }
+        .start-class,
+        .shrink-remove.shrink-remove-active{
+            height:400px;
+        }
+
+    </style>
+    <!--ui-grid-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/widget/ui_grid/ui-grid.css" charset="UTF-8"/>-->
+
+    <!-- ui-grid -->
+    <link href="../../common/ui_grid/css/ui-grid.css" rel="stylesheet" />
+    <!--<link href="../common/ui_grid/osspage/skin/osspage.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href="main.css" type="text/css">-->
+
+    <script src="../../common/jquery1.9/jquery-1.9.1.min.js"></script>
+    <script src="../../common/angular-1.4.8/angular.js"></script>
+    <script src="../../common/angular-1.4.8/angular-touch.js"></script>
+    <script src="../../common/angular-1.4.8/angular-animate.js"></script>
+    <script src="../../common/angular-1.4.8/angular-aria.js"></script>
+
 </head>
-<body>
-$END$
+<body ng-controller="myController">
+    <div>
+        <h3>Image Animation:</h3>
+        <input type="button" ng-click="myImgClass='fadeOut'" value = "Fade Out">
+        <input type="button" ng-click="myImgClass=''" value = "Fade In">
+        <input type="button" ng-click="myImgClass='shrink'" value = "Small">
+        <input type="button" ng-click="myImgClass=''" value = "Big">
+        <hr>
+        <img ng-class="myImgClass" src ="../../images/6.jpg" alt="" width="500px" height="400px">
+    </div>
 </body>
+<script>
+    angular.module('myApp',['ngAnimate'])
+        .controller("myController",function($scope){
+            $scope.myImgClass = 'start-class';
+        })
+        .animation('.fadeOut',function () {
+            return{
+                enter: function (element,parentElement,afterElement,doneCallback) {},
+                leave: function (element,doneCallback) {},
+                move: function (element,parentElement,afterElement,doneCallback) {},
+                addClass:function (element,className,done) {
+                    jQuery(element).animate({opacity:0.3},1500);
+                },
+                removeClass : function (element,className,done) {
+                    jQuery(element).animate({opacity: 1},1500);
+                }
+
+            }
+        })
+        // .animation('.shrink',function () {
+        //     return{
+        //         enter: function (element,parentElement,afterElement,doneCallback) {},
+        //         leave: function (element,doneCallback) {},
+        //         move: function (element,parentElement,afterElement,doneCallback) {},
+        //         addClass:function (element,className,done) {
+        //             jQuery(element).animate({height:'100px',width:'100px'},1500);
+        //         },
+        //         removeClass : function (element,className,done) {
+        //             jQuery(element).animate({height: '400px',width:'500px'},1500);
+        //         }
+        //
+        //     }
+        // })
+</script>
 </html>

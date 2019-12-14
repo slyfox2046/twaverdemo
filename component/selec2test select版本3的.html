@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../common/select2-3.5.3/select2.css">
+    <link rel="stylesheet" href="../component/main.css">
+
+    <script src="../common/jquery1.9/jquery-1.9.1.min.js"></script>
+    <script src="../common/select2-3.5.3/select2.js"></script>
+</head>
+<body>
+
+<a href="" uib-dropdown-toggle="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-bell-o"></i><span>5</span>
+
+    <div class="notification-ring">aaa</div>
+</a>
+<div >
+    <input id="c01-select" style="width:200px"></input>
+</div>
+<br>
+<br>
+<div >
+    <input id="c02-select" style="width:300px"></input>
+</div>
+<br>
+<br>
+
+<br>
+<br>
+<div >
+    <input select2 id="c03-select" style="width:200px"></input>
+</div>
+
+<button onclick="click1()" style="width: 50px">click1</button>
+
+</body>
+<script>
+    function click1(){
+        console.log(   $("#c02-select").select2("data")[0]);
+
+    }
+    $(function(){
+        var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, tag: 'duplicate' }, { id: 3, tag: 'invalid' }, { id: 4, tag: 'wontfix' }];
+        $("#c01-select").select2({
+            data: {
+                results:data,
+                // text:'tag'
+            },
+            placeholder:'请选择123',
+            allowClear:true
+        })
+        $("#c00-select").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+        })
+
+
+
+
+        $("#c02-select").select2({
+            data:function(){
+              return {
+                  text:"text1"
+              }
+            },
+            ajax: {
+                url: "data2.json",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term,
+                    };
+                },
+                processResults: function (data) {
+                    console.log(data);
+                    return {
+                        results: data.results,
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 1,
+            // templateResult: formatRepo,
+            // templateSelection: formatRepoSelection
+        });
+
+
+
+        $('.select2demo').select2({
+            // placeholder: "Search for a repository",
+            minimumInputLength: 1,
+            // data:function(){
+            //     return{
+            //         text:'OM_INSPECT_TASK_NAME',
+            //         id:'OM_INSPECT_TASK_ID'
+            //     }
+            // },
+
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: "http://10.130.60.19:8090/inspection/api/inspect/queryOpSchedule.do?isEnabled=&planName=性能\n" +
+                    "&domainId=0220,0891,0991,0871,0571,0230&creStartTime=&creEndTime=&page=1&pagesize=10",
+                dataType: 'json',
+                quietMillis: 250,
+                data: function (term, page) {
+                    return {
+                        q: term, // search term
+                    };
+                },
+                processResults: function (data, page) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter the remote JSON data
+                    console.log(data);
+                    return {
+                        results: data.returnObject,
+                        text:'OM_INSPECT_TASK_NAME',
+                        id:'OM_INSPECT_TASK_ID'
+                    };
+                },
+                // cache: true
+            }
+        });
+
+    })
+</script>
+</html>

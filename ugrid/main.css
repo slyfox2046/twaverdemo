@@ -2,3 +2,20 @@
   width: 100%;
   height: 400px;
 }
+
+.ui-grid-icon-ok:before{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  z-index: 9;
+  margin-right: 5px;
+  background: url(icon-checkbox.png) no-repeat;
+  background-position: -20px 0px;
+  vertical-align: text-top;
+  content:'';
+}
+/*.ui-grid-icon-ok{*/
+  /*content: '';*/
+/*}*/
+
+

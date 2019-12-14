@@ -8,8 +8,8 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
-<body >
-<div ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp" ng-controller="myCtrl">
+<div >
     <input type = 'test' ng-change="changeKeyValue(searchField)" ng-model="searchField" style = 'display:block;width:200px' ng-click = 'hidden=!hidden' value="{{searchField}}"/></input>
     <div ng-hide="hidden">
         <select style = 'width:200px' ng-change="change(x)" ng-model="x" multiple>
@@ -18,11 +18,12 @@
     </div>
 </div>
 <div>
+<!--    <span>&starf;&starf;&starf;&starf;&starf;</span>-->
     <p><h1>angular输入选择框</h1></p>
     <p><h2>逻辑实现步骤</h2></p>
     <p>1文本框做输入，并监控器change事件，在change事件中获取输入值，获取的输入值与选择框中的各个下拉项进行比较</p>
     <p>2如果包含则只显示包含的部分，不包含则显示全部</p>
-
+<button ng-click="ttt()">ttt</button>
 </div>
 
 
@@ -53,10 +54,24 @@
             //下拉选展示
             $scope.hidden=false;
             //如果不包含或者输入的是空字符串则用初始变量副本做替换
-            if($scope.datas.length==0 || ''==v){
+                if($scope.datas.length==0 || ''==v){
                 $scope.datas=$scope.tempdatas;
             }
             console.log($scope.datas);
+        }
+
+
+        $scope.do1 = function (a,b,callback) {
+            console.log(a,b);
+            var res = a+b ;
+            callback(res);
+
+        }
+        var testCallBack = function (s1) {
+            alert(s1);
+        }
+        $scope.ttt = function () {
+            $scope.do1(3,6,testCallBack);
         }
     });
 </script>

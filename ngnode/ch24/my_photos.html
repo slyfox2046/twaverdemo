@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div>
+    <span ng-repeat="photo in photos"
+        ng-class="{active:photo.selected}">
+        <a href="" ng-click="select(photo)">{{photo.title}}</a>
+    </span>
+    <div ng-transclude = "true"></div>
+</div>

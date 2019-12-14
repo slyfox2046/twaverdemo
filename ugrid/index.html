@@ -29,6 +29,7 @@
   <body>
 
 <div ng-controller="MainCtrl">
+  <!--<div ng-show="false">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>-->
   <button type="button" class="btn btn-success" ng-click="toggleMultiSelect()">Toggle multiSelect</button>  <strong>MultiSelect:</strong> <span ng-bind="gridApi.grid.options.multiSelect"></span>
   <button type="button" class="btn btn-success" ng-click="toggleRow1()">Toggle Row 0</button>
   <br/>
@@ -43,7 +44,7 @@
   <br/>
 
   <div id="grid1Selection" ui-grid="gridOptions" ui-grid-selection ui-grid-cellnav class="grid"></div>
-</div>
+
 <div ng-controller="SecondCtrl">
   Single selection grid without rowHeader, and allowing rowSelection to be toggled on and off dynamically:
   <br/>

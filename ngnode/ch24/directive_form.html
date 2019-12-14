@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <!--css-->
+    <link rel="stylesheet" href="../../common/oss_pc/oss/css/oss.min_new.css" />
+    <link rel="stylesheet" href="../../common/oss_pc/oss/iconfont/iconfont.css" />
+
+    <!--ui-grid-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/widget/ui_grid/ui-grid.css" charset="UTF-8"/>-->
+
+    <!-- ui-grid -->
+    <link href="../../common/ui_grid/css/ui-grid.css" rel="stylesheet" />
+    <!--<link href="../common/ui_grid/osspage/skin/osspage.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">-->
+    <!--    <link rel="stylesheet" href="main.css" type="text/css">-->
+
+    <script src="../../common/angular-1.4.8/angular.js"></script>
+    <script src="../../common/angular-1.4.8/angular-touch.js"></script>
+    <script src="../../common/angular-1.4.8/angular-animate.js"></script>
+    <script src="../../common/angular-1.4.8/angular-aria.js"></script>
+
 </head>
-<body>
-$END$
+<body ng-controller="Characters">
+    <div>
+        <h2>Forms Directives</h2>
+        <input type="text" ng-model="someText">{{someText}}
+        <hr>
+        <input type="checkbox" ng-model="cbValue" ng-true-value ="'AWESOME'" ng-false-value="'BUMMER'">
+        CheckBox: {{cbValue}} <hr>
+        <input type="radio" ng-model="cameraName" value = "Canon"> Canon <br>
+        <input type="radio" ng-model="cameraName" value = "Nikon"> Nikon <br>
+        Selected Camera:{{cameraName}}
+        <hr>
+        <select ng-model = "camera" id="" ng-options="c.model group by c.make for c in cameras"></select>
+        {{camera|json}}
+    </div>
+
+
 </body>
+<script>
+    angular.module('myApp',[])
+        .controller("Characters",function($scope){
+            console.log("abc");
+            $scope.cameras = [
+                {make:'Canon',model:'70D',mp:20.2},
+                {make:'Canon',model:'6D',mp:20},
+                {make:'Nikon',model:'D7100',mp:24.1},
+                {make:'Nikon',model:'D5200',mp:24.1},
+            ];
+            $scope.cameraObj = $scope.cameras[0];
+            $scope.cameraName ="Canon";
+            $scope.cbValue = "";
+            $scope.someText = "";
+        })
+</script>
 </html>

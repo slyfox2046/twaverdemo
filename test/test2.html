@@ -21,9 +21,11 @@
     <br>
     <br>
     <div >
-    <input list = "cars" ng-model="query" ng-model-options="{debounce:200}"  />
+    <input list = "cars" ng-model="query" ng-model-options="{debounce:200}" id="aaa"  />
     <datalist id="cars" class="datalist ">
-        <option value="{{item}}" ng-repeat="item in dataList"></option>
+        <select>
+        <option value="{{item}}" ng-repeat="item in dataList" id="{{$index}}"></option>
+        </select>
     </datalist>
     </div>
 
@@ -31,9 +33,11 @@
 
         <input list="cars1"  id="input" onchange="inputSelect()"/>
         <datalist id="cars1">
+            <select name="" id="">
             <option value="111" data-value="111"  data-id="1">
             <option value="122"  data-value="122" data-id="2">
             <option value="1222" data-value="1222" data-id="4">
+            </select>
         </datalist>
     </div>
 <button ng-click="ttt()"> ttt</button>
@@ -54,6 +58,7 @@
     }
 </style>
 <script type="text/javascript" src="../common/angular-1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="../node_modules/npmuptest/npmuptest.js"></script>
 <script>
 
     function inputSelect(){
@@ -70,6 +75,10 @@
         console.log(input_select,option_length,option_id);
     };
     angular.module('myapp',[]).controller('ctrl',function ($scope,$http) {
+        var oA = document.getElementById('cars');
+        oA.onclick = function () {
+            console.log(111)
+        }
         $scope.greeting = {
             text: 'Hello'
         };
@@ -103,7 +112,8 @@
         // $scope.getData();
 
         $scope.ttt = function () {
-            alert($scope.query);
+            // alert($scope.query);
+            moduleName.sayHi();
 
         }
 
