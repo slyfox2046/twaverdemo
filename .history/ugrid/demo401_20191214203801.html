@@ -1,0 +1,65 @@
+<!--
+ * @Author: sly
+ * @Date: 2019-01-28 14:14:13
+ * @LastEditTime: 2019-12-14 20:37:57
+ * @LastEditors: 
+ * @Description: In User Settings Edit
+ * @FilePath: \twaverdemo\ugrid\demo401.html
+ -->
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <!--&lt;!&ndash;css&ndash;&gt;-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/oss/css/oss.min_new.css"/>-->
+    <!--<link rel="stylesheet" href="../common/oss_pc/oss/iconfont/iconfont.css"/>-->
+
+    <!--&lt;!&ndash;ui-grid&ndash;&gt;-->
+    <!--&lt;!&ndash;<link rel="stylesheet" href="../common/oss_pc/widget/ui_grid/ui-grid.css" charset="UTF-8"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash; ui-grid &ndash;&gt;-->
+    <!--<link href="../common/ui_grid/css/ui-grid.css" rel="stylesheet"/>-->
+    <!--&lt;!&ndash;<link href="../common/ui_grid/osspage/skin/osspage.css" rel="stylesheet" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">&ndash;&gt;-->
+    <!--<link rel="stylesheet" href="main.css" type="text/css">-->
+
+    <script src="../common/angular-1.4.8/angular.js"></script>
+    <script src="../common/angular-1.4.8/angular-touch.js"></script>
+    <script src="../common/angular-1.4.8/angular-animate.js"></script>
+    <script src="../common/angular-1.4.8/angular-aria.js"></script>
+
+    <!--<script src="../common/ui_grid/js/ui-grid.min.js"></script>-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.js"></script>-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-touch.js"></script>-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-animate.js"></script>-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular-aria.js"></script>-->
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/lodash.min.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/jszip.min.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/excel-builder.dist.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+    <link rel="stylesheet" href="main.css" type="text/css">
+
+</head>
+
+<body>
+
+    <div ng-controller="MainCtrl">
+        <button id="filterToggle" type="button" class="btn btn-success" ng-click="toggleFilterRow()">Toggle Filter</button>
+        <button id="refreshButton" type="button" class="btn btn-success" ng-click="refreshData()">Refresh Data</button> <strong>Calls Pending:</strong> <span ng-bind="callsPending"></span>
+        <br>
+        <br>
+        <strong>{{ myData.length }} rows</strong>
+        <br>
+        <div id="grid1" ui-grid="$ctrl.gridOptions" ui-grid-cellNav ui-grid-edit ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping class="grid"></div>
+    </div>
+
+    <div style="background-color: #ff5215;"></div>
+
+    <script src="demo401.js"></script>
+</body>
+
+</html>Dell
