@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2019-10-08 10:36:39
- * @LastEditTime: 2019-12-14 20:34:05
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \twaverdemo\test\代码格式化文件.js
- */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 

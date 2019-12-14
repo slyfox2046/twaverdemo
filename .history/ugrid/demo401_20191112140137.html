@@ -1,14 +1,5 @@
-<!--
- * @Author: your name
- * @Date: 2019-01-28 14:14:13
- * @LastEditTime: 2019-12-14 20:32:35
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \twaverdemo\ugrid\demo401.html
- -->
 <!doctype html>
 <html ng-app="app">
-
 <head>
     <!--&lt;!&ndash;css&ndash;&gt;-->
     <!--<link rel="stylesheet" href="../common/oss_pc/oss/css/oss.min_new.css"/>-->
@@ -44,22 +35,20 @@
     <link rel="stylesheet" href="main.css" type="text/css">
 
 </head>
-
 <body>
 
-    <div ng-controller="MainCtrl">
-        <button id="filterToggle" type="button" class="btn btn-success" ng-click="toggleFilterRow()">Toggle Filter</button>
-        <button id="refreshButton" type="button" class="btn btn-success" ng-click="refreshData()">Refresh Data</button> <strong>Calls Pending:</strong> <span ng-bind="callsPending"></span>
-        <br>
-        <br>
-        <strong>{{ myData.length }} rows</strong>
-        <br>
-        <div id="grid1" ui-grid="$ctrl.gridOptions" ui-grid-cellNav ui-grid-edit ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping class="grid"></div>
-    </div>
+<div ng-controller="MainCtrl">
+    <button id="filterToggle" type="button" class="btn btn-success" ng-click="toggleFilterRow()">Toggle Filter</button>
+    <button id="refreshButton" type="button" class="btn btn-success" ng-click="refreshData()">Refresh Data</button>  <strong>Calls Pending:</strong> <span ng-bind="callsPending"></span>
+    <br>
+    <br>
+    <strong>{{ myData.length }} rows</strong>
+    <br>
+    <div id="grid1" ui-grid="$ctrl.gridOptions" ui-grid-cellNav ui-grid-edit ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping class="grid"></div>
+</div>
 
-    <div style="background-color: #ff5215;"></div>
+<div style="background-color: #ff5215;"></div>
 
-    <script src="demo401.js"></script>
+<script src="demo401.js"></script>
 </body>
-
 </html>
