@@ -1,1 +1,5 @@
+./node_modules
+.history/
+.vscode/
 node_modules
+.idea/
